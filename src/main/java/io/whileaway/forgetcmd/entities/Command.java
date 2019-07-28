@@ -18,4 +18,6 @@ public class Command {
     private String version;
     private String platform;
     private Integer argNum;
+    private Long whenDeprecated;
+    private Long whenEnable;
 }

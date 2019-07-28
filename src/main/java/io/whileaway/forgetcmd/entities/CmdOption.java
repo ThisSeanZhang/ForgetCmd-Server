@@ -14,9 +14,11 @@ public class CmdOption {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long oid;
-    private Long belongCid;
+    private Long cid;
     private String briefName;
     private String fullName;
     private String description;
+    private Long whenDeprecated;
+    private Long whenEnable;
 
 }
