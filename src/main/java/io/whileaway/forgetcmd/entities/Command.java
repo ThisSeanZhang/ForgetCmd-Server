@@ -14,10 +14,12 @@ public class Command {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cid;
     private String commandName;
+    private String briefDesc;
     private String description;
     private String version;
     private String platform;
     private Integer argNum;
     private Long whenDeprecated;
     private Long whenEnable;
+    private Long frequency;
 }

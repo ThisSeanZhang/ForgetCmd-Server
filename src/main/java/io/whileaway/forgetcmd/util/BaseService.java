@@ -1,7 +1,10 @@
 package io.whileaway.forgetcmd.util;
 
+import io.whileaway.forgetcmd.repository.CommandRepository;
 import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.Objects;
 
 public interface BaseService<A, B> {
@@ -10,6 +13,18 @@ public interface BaseService<A, B> {
         if(Objects.isNull(a)) CommonErrorEnum.PARAM_ERROR.throwThis();
         return getRepository().save(a);
     }
+    // 在想有没有必要吧Spec直接集成到Service中
+//    default Optional<List<A>> findInDB (List<Specification<A>> conditions, Function<Specification<A>, Optional<List<A>>> findInDB) {
+//        Specification<A> filterCondition = conditions.stream().filter(Objects::nonNull).reduce(this::andJoin).orElse(null);
+//        getRepository().findAll(filterCondition);
+//        return findInDB.apply();
+//    }
 
-    JpaRepository<A, B> getRepository();
+    default Specification<A> andJoin(Specification<A> perCondition, Specification<A> condition) {
+        if (perCondition != null && condition != null)
+            return perCondition.and(condition);
+        return perCondition == null ? condition : perCondition;
+    }
+
+    BaseRepository<A, B> getRepository();
 }

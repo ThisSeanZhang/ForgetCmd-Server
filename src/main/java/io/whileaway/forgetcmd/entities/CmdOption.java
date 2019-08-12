@@ -20,5 +20,5 @@ public class CmdOption {
     private String description;
     private Long whenDeprecated;
     private Long whenEnable;
-
+    private Long frequency;
 }
