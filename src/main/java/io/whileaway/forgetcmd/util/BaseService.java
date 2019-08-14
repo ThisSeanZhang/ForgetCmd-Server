@@ -6,12 +6,18 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public interface BaseService<A, B> {
 
     default A save(A a) {
         if(Objects.isNull(a)) CommonErrorEnum.PARAM_ERROR.throwThis();
         return getRepository().save(a);
+    }
+
+    default Optional<A> findById(B b) {
+        if(Objects.isNull(b)) CommonErrorEnum.PARAM_ERROR.throwThis();
+        return getRepository().findById(b);
     }
     // 在想有没有必要吧Spec直接集成到Service中
 //    default Optional<List<A>> findInDB (List<Specification<A>> conditions, Function<Specification<A>, Optional<List<A>>> findInDB) {

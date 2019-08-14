@@ -16,8 +16,8 @@ public enum CommonErrorEnum implements CommonError {
     }
 
     @Override
-    public Supplier<CommonException> getException() {
-        return () -> this.exception;
+    public CommonException getException() {
+        return this.exception;
     }
 
 }

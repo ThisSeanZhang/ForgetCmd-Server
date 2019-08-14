@@ -24,7 +24,7 @@ public class CmdController {
 
     @GetMapping("/{cid}")
     public Result<Command> getCommand(@PathVariable("cid") Long cid){
-        return ResultUtil.success();
+        return ResultUtil.success(commandTask.findById(cid));
     }
 
     @GetMapping("/search-bar")

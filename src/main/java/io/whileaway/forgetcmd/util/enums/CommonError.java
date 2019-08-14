@@ -7,8 +7,8 @@ import java.util.function.Supplier;
 public interface CommonError {
 
     default void throwThis() {
-        throw getException().get();
+        throw getException();
     }
 
-    Supplier<CommonException> getException();
+    CommonException getException();
 }

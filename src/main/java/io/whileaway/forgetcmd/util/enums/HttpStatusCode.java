@@ -7,7 +7,7 @@ public enum HttpStatusCode {
     SWITCHING_PROTOCOLS(101, "Switching Protocols"),
     PROCESSING(102, "Processing"),
     CHECKPOINT(103, "Checkpoint"),
-    OK(200, "OK"),
+    OK(200, "成功"),
     CREATED(201, "Created"),
     ACCEPTED(202, "Accepted"),
     NON_AUTHORITATIVE_INFORMATION(203, "Non-Authoritative Information"),
