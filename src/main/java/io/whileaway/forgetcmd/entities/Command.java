@@ -19,7 +19,7 @@ public class Command {
     private String version;
     private String platform;
     private Integer argNum;
-    private Long whenDeprecated;
-    private Long whenEnable;
+    private String whenDeprecated;
+    private String whenEnable;
     private Long frequency;
 }

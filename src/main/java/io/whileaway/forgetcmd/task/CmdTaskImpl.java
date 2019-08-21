@@ -1,5 +1,6 @@
 package io.whileaway.forgetcmd.task;
 
+import io.whileaway.forgetcmd.entities.CmdOption;
 import io.whileaway.forgetcmd.entities.Command;
 import io.whileaway.forgetcmd.response.SearchCmdResponse;
 import io.whileaway.forgetcmd.service.CmdService;
@@ -28,5 +29,10 @@ public class CmdTaskImpl implements CmdTask {
     public Command findById(Long cid) {
         Optional<Command> cmd = cmdService.findById(cid);
         return cmd.orElseThrow(CommonErrorEnum.NOT_FOUND::getException);
+    }
+
+    @Override
+    public List<CmdOption> findCmdOptions(Long cid) {
+        return null;
     }
 }

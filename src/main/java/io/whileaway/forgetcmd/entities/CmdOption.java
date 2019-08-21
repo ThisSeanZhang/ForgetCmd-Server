@@ -2,10 +2,7 @@ package io.whileaway.forgetcmd.entities;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -18,6 +15,7 @@ public class CmdOption {
     private String briefName;
     private String fullName;
     private String description;
+    private boolean required;
     private Long whenDeprecated;
     private Long whenEnable;
     private Long frequency;

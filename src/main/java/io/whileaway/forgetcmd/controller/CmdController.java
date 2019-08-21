@@ -1,5 +1,6 @@
 package io.whileaway.forgetcmd.controller;
 
+import io.whileaway.forgetcmd.entities.CmdOption;
 import io.whileaway.forgetcmd.entities.Command;
 import io.whileaway.forgetcmd.response.JustNeedKeyValue;
 import io.whileaway.forgetcmd.response.SearchCmdResponse;
@@ -25,6 +26,11 @@ public class CmdController {
     @GetMapping("/{cid}")
     public Result<Command> getCommand(@PathVariable("cid") Long cid){
         return ResultUtil.success(commandTask.findById(cid));
+    }
+
+    @GetMapping("/{cid}/options")
+    public Result<List<CmdOption>> getCmdOptions(@PathVariable("cid") Long cid){
+        return ResultUtil.success(commandTask.findCmdOptions(cid));
     }
 
     @GetMapping("/search-bar")
