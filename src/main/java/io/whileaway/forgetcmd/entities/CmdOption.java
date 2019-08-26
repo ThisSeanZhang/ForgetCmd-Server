@@ -15,7 +15,6 @@ public class CmdOption {
     private String briefName;
     private String fullName;
     private String description;
-    private boolean required;
     private Long whenDeprecated;
     private Long whenEnable;
     private Long frequency;
