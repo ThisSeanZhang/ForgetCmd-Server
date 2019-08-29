@@ -1,6 +1,8 @@
 package io.whileaway.forgetcmd.entities;
 
+import io.whileaway.forgetcmd.enums.OptionTypeEnum;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -14,6 +16,9 @@ public class CmdOption {
     private Long cid;
     private String briefName;
     private String fullName;
+    private String rules;
+    @Convert(converter = OptionTypeEnum.Converter.class)
+    private OptionTypeEnum type;
     private String description;
     private Long whenDeprecated;
     private Long whenEnable;
