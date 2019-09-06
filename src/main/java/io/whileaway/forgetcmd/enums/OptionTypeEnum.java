@@ -2,16 +2,21 @@ package io.whileaway.forgetcmd.enums;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import javax.persistence.AttributeConverter;
 import java.util.stream.Stream;
 
-@JsonFormat(shape = JsonFormat.Shape.NUMBER_INT)
+//@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum OptionTypeEnum {
     NONE("undefined", 0),
     NUMBER("number", 1),
     ENUM("enum", 2),
     STRING("string", 3),
+    MULTIPLE("MULTIPLE", 1<<14),
+    MULTIPLE_NUMBER("MULTIPLE_NUMBER", MULTIPLE.value + NUMBER.value),
+    MULTIPLE_ENUM("MULTIPLE_ENUM", MULTIPLE.value + ENUM.value),
+    MULTIPLE_STRING("MULTIPLE_STRING", MULTIPLE.value + STRING.value),
     ;
     private String type;
     private Integer value;
@@ -29,7 +34,7 @@ public enum OptionTypeEnum {
         this.type = type;
     }
 
-    @JsonProperty("type")
+    @JsonValue
     public Integer getValue() {
         return value;
     }
@@ -52,5 +57,11 @@ public enum OptionTypeEnum {
                     .findAny()
                     .orElse(OptionTypeEnum.STRING);
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Integer.valueOf(1<<30));
+        System.out.println(Integer.toBinaryString(1<<14));
+        System.out.println(OptionTypeEnum.MULTIPLE_STRING.value);
     }
 }
