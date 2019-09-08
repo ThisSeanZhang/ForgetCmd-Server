@@ -1,6 +1,6 @@
-package io.whileaway.forgetcmd.repository;
+package io.whileaway.forgetcmd.cmd.repository;
 
-import io.whileaway.forgetcmd.entities.CmdParam;
+import io.whileaway.forgetcmd.cmd.entities.CmdParam;
 import io.whileaway.forgetcmd.util.BaseRepository;
 
 import java.util.List;

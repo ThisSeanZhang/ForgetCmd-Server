@@ -1,7 +1,7 @@
-package io.whileaway.forgetcmd.service;
+package io.whileaway.forgetcmd.cmd.service;
 
-import io.whileaway.forgetcmd.entities.CmdParam;
-import io.whileaway.forgetcmd.repository.CmdParamRepository;
+import io.whileaway.forgetcmd.cmd.entities.CmdParam;
+import io.whileaway.forgetcmd.cmd.repository.CmdParamRepository;
 import io.whileaway.forgetcmd.util.BaseRepository;
 import org.springframework.stereotype.Service;
 

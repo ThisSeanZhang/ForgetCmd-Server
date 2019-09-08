@@ -1,7 +1,5 @@
-package io.whileaway.forgetcmd.enums;
+package io.whileaway.forgetcmd.cmd.enums;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import javax.persistence.AttributeConverter;
@@ -13,10 +11,12 @@ public enum OptionTypeEnum {
     NUMBER("number", 1),
     ENUM("enum", 2),
     STRING("string", 3),
+    MAP("map", 4),
     MULTIPLE("MULTIPLE", 1<<14),
     MULTIPLE_NUMBER("MULTIPLE_NUMBER", MULTIPLE.value + NUMBER.value),
     MULTIPLE_ENUM("MULTIPLE_ENUM", MULTIPLE.value + ENUM.value),
     MULTIPLE_STRING("MULTIPLE_STRING", MULTIPLE.value + STRING.value),
+    MULTIPLE_MAP("MULTIPLE_MAP", MULTIPLE.value + MAP.value),
     ;
     private String type;
     private Integer value;
@@ -62,6 +62,6 @@ public enum OptionTypeEnum {
     public static void main(String[] args) {
         System.out.println(Integer.valueOf(1<<30));
         System.out.println(Integer.toBinaryString(1<<14));
-        System.out.println(OptionTypeEnum.MULTIPLE_STRING.value);
+        System.out.println(OptionTypeEnum.MULTIPLE_MAP.value);
     }
 }

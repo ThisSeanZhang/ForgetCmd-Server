@@ -1,8 +1,8 @@
-package io.whileaway.forgetcmd.service;
+package io.whileaway.forgetcmd.cmd.service;
 
-import io.whileaway.forgetcmd.entities.CmdOption;
-import io.whileaway.forgetcmd.enums.CmdError;
-import io.whileaway.forgetcmd.repository.CmdOptionRepository;
+import io.whileaway.forgetcmd.cmd.entities.CmdOption;
+import io.whileaway.forgetcmd.cmd.enums.CmdError;
+import io.whileaway.forgetcmd.cmd.repository.CmdOptionRepository;
 import io.whileaway.forgetcmd.util.BaseRepository;
 import org.springframework.stereotype.Service;
 

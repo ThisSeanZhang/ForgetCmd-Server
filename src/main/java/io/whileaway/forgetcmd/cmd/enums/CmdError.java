@@ -1,4 +1,4 @@
-package io.whileaway.forgetcmd.enums;
+package io.whileaway.forgetcmd.cmd.enums;
 
 import io.whileaway.forgetcmd.util.enums.CommonError;
 import io.whileaway.forgetcmd.util.exception.CommonException;

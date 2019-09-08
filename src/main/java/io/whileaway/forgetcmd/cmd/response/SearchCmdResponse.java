@@ -1,4 +1,4 @@
-package io.whileaway.forgetcmd.response;
+package io.whileaway.forgetcmd.cmd.response;
 
 import lombok.Data;
 

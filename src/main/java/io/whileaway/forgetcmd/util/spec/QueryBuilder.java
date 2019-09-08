@@ -1,7 +1,7 @@
 package io.whileaway.forgetcmd.util.spec;
 
-import io.whileaway.forgetcmd.entities.Command;
-import io.whileaway.forgetcmd.entities.Command_;
+import io.whileaway.forgetcmd.cmd.entities.Command;
+import io.whileaway.forgetcmd.cmd.entities.Command_;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.metamodel.SingularAttribute;

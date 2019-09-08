@@ -1,9 +1,7 @@
 package io.whileaway.forgetcmd.util;
 
-import io.whileaway.forgetcmd.repository.CommandRepository;
 import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Objects;
 import java.util.Optional;

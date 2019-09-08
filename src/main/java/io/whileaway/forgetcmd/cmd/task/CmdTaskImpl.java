@@ -1,13 +1,13 @@
-package io.whileaway.forgetcmd.task;
+package io.whileaway.forgetcmd.cmd.task;
 
-import io.whileaway.forgetcmd.entities.CmdOption;
-import io.whileaway.forgetcmd.entities.CmdParam;
-import io.whileaway.forgetcmd.entities.Command;
-import io.whileaway.forgetcmd.enums.CmdError;
-import io.whileaway.forgetcmd.response.SearchCmdResponse;
-import io.whileaway.forgetcmd.service.CmdParamService;
-import io.whileaway.forgetcmd.service.CmdService;
-import io.whileaway.forgetcmd.service.OptionService;
+import io.whileaway.forgetcmd.cmd.entities.CmdOption;
+import io.whileaway.forgetcmd.cmd.entities.CmdParam;
+import io.whileaway.forgetcmd.cmd.entities.Command;
+import io.whileaway.forgetcmd.cmd.enums.CmdError;
+import io.whileaway.forgetcmd.cmd.response.SearchCmdResponse;
+import io.whileaway.forgetcmd.cmd.service.CmdParamService;
+import io.whileaway.forgetcmd.cmd.service.CmdService;
+import io.whileaway.forgetcmd.cmd.service.OptionService;
 import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

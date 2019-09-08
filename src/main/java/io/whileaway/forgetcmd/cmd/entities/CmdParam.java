@@ -1,4 +1,4 @@
-package io.whileaway.forgetcmd.entities;
+package io.whileaway.forgetcmd.cmd.entities;
 
 import lombok.Data;
 

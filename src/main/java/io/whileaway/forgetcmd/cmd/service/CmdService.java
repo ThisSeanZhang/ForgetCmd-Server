@@ -1,7 +1,7 @@
-package io.whileaway.forgetcmd.service;
+package io.whileaway.forgetcmd.cmd.service;
 
-import io.whileaway.forgetcmd.entities.Command;
-import io.whileaway.forgetcmd.response.SearchCmdResponse;
+import io.whileaway.forgetcmd.cmd.entities.Command;
+import io.whileaway.forgetcmd.cmd.response.SearchCmdResponse;
 import io.whileaway.forgetcmd.util.BaseService;
 
 import java.util.List;

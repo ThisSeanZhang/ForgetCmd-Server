@@ -1,11 +1,10 @@
-package io.whileaway.forgetcmd.controller;
+package io.whileaway.forgetcmd.cmd.controller;
 
-import io.whileaway.forgetcmd.entities.CmdOption;
-import io.whileaway.forgetcmd.entities.CmdParam;
-import io.whileaway.forgetcmd.entities.Command;
-import io.whileaway.forgetcmd.response.JustNeedKeyValue;
-import io.whileaway.forgetcmd.response.SearchCmdResponse;
-import io.whileaway.forgetcmd.task.CmdTask;
+import io.whileaway.forgetcmd.cmd.entities.CmdOption;
+import io.whileaway.forgetcmd.cmd.entities.CmdParam;
+import io.whileaway.forgetcmd.cmd.entities.Command;
+import io.whileaway.forgetcmd.cmd.response.SearchCmdResponse;
+import io.whileaway.forgetcmd.cmd.task.CmdTask;
 import io.whileaway.forgetcmd.util.Result;
 import io.whileaway.forgetcmd.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;

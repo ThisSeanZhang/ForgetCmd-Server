@@ -1,7 +1,7 @@
-package io.whileaway.forgetcmd.specs;
+package io.whileaway.forgetcmd.cmd.specs;
 
-import io.whileaway.forgetcmd.entities.Command;
-import io.whileaway.forgetcmd.entities.Command_;
+import io.whileaway.forgetcmd.cmd.entities.Command;
+import io.whileaway.forgetcmd.cmd.entities.Command_;
 import io.whileaway.forgetcmd.util.StringUtils;
 import io.whileaway.forgetcmd.util.spec.QueryBuilder;
 import org.springframework.data.jpa.domain.Specification;
@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 public class CommandSpec {
-    public static Specification<Command> fuzzyMatch(Supplier<String> supplier) {
+    private static Specification<Command> fuzzyMatch(Supplier<String> supplier) {
         return QueryBuilder.like(Command_.commandName, StringUtils::isEmptyOrBlank, supplier);
     }
     public static Specification<Command> fuzzyMatch(String keyword) {

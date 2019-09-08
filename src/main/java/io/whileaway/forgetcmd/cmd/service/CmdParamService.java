@@ -1,6 +1,6 @@
-package io.whileaway.forgetcmd.service;
+package io.whileaway.forgetcmd.cmd.service;
 
-import io.whileaway.forgetcmd.entities.CmdParam;
+import io.whileaway.forgetcmd.cmd.entities.CmdParam;
 import io.whileaway.forgetcmd.util.BaseService;
 
 import java.util.List;

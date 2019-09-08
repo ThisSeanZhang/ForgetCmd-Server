@@ -1,9 +1,9 @@
-package io.whileaway.forgetcmd.service;
+package io.whileaway.forgetcmd.cmd.service;
 
-import io.whileaway.forgetcmd.entities.Command;
-import io.whileaway.forgetcmd.repository.CommandRepository;
-import io.whileaway.forgetcmd.response.SearchCmdResponse;
-import io.whileaway.forgetcmd.specs.CommandSpec;
+import io.whileaway.forgetcmd.cmd.entities.Command;
+import io.whileaway.forgetcmd.cmd.repository.CommandRepository;
+import io.whileaway.forgetcmd.cmd.response.SearchCmdResponse;
+import io.whileaway.forgetcmd.cmd.specs.CommandSpec;
 import io.whileaway.forgetcmd.util.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

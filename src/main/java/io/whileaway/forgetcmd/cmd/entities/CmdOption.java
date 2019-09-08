@@ -1,8 +1,7 @@
-package io.whileaway.forgetcmd.entities;
+package io.whileaway.forgetcmd.cmd.entities;
 
-import io.whileaway.forgetcmd.enums.OptionTypeEnum;
+import io.whileaway.forgetcmd.cmd.enums.OptionTypeEnum;
 import lombok.Data;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
