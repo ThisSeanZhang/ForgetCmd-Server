@@ -29,4 +29,10 @@ public class CommonException extends RuntimeException{
         }
     }
 
+    public static class ServerErrorException extends CommonException{
+        public ServerErrorException(String message) {
+            super(500, message);
+        }
+    }
+
 }
