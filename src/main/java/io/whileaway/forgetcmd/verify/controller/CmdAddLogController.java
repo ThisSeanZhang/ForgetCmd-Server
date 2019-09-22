@@ -2,12 +2,14 @@ package io.whileaway.forgetcmd.verify.controller;
 
 import io.whileaway.forgetcmd.util.Result;
 import io.whileaway.forgetcmd.util.ResultUtil;
+import io.whileaway.forgetcmd.verify.entities.CmdAddLog;
+import io.whileaway.forgetcmd.verify.request.AddLogSearchRequest;
 import io.whileaway.forgetcmd.verify.request.CmdAddRequest;
+import io.whileaway.forgetcmd.verify.response.CmdAddLogBriefResponse;
 import io.whileaway.forgetcmd.verify.task.CmdAddLogTask;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/verifies")
@@ -23,5 +25,15 @@ public class CmdAddLogController {
     public Result createAddCommand(@RequestBody CmdAddRequest request) {
         task.addCmdLog(request);
         return ResultUtil.success();
+    }
+
+    @GetMapping("/cmds/{cid}")
+    public Result<CmdAddLog> findAddCommandById(@PathVariable("cid")Long cid) {
+        return ResultUtil.success(task.findById(cid));
+    }
+
+    @GetMapping("/search")
+    public Result<List<CmdAddLog>> getAll(AddLogSearchRequest request) {
+        return ResultUtil.success(task.searchAddLog(request));
     }
 }

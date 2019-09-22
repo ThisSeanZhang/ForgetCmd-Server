@@ -15,6 +15,7 @@ public class CmdParam {
     private Long cpid;
     private Long cid;
     private Integer sort;
+    private String paramName;
     private String description;
     private boolean required;
 }
