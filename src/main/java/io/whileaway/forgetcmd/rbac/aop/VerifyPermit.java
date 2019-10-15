@@ -29,7 +29,7 @@ public class VerifyPermit {
         System.out.println("AspectJ" + Arrays.toString(joinPoint.getArgs()));
         Developer developer = validUtil.getCurrentDeveloper();
 //        if (developer.getAdmin()) return;
-        Long pid = validUtil.getURITempleVariables(needPermit.pathKey());
+        Long pid = validUtil.getURITempleVariables(needPermit.resourceId());
         System.out.println("pid为" + pid);
     }
 }

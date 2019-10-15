@@ -3,7 +3,7 @@ package io.whileaway.forgetcmd.rbac.enums;
 import javax.persistence.AttributeConverter;
 import java.util.stream.Stream;
 
-public enum OptionType {
+public enum PermissionType {
 
     NONE("undefined", 0),
     ADD("ADD", 1),
@@ -14,7 +14,7 @@ public enum OptionType {
     private String type;
     private Integer value;
 
-    OptionType(String string, int i) {
+    PermissionType(String string, int i) {
         this.type = string;
         this.value = i;
     }
@@ -35,19 +35,19 @@ public enum OptionType {
         this.value = value;
     }
 
-    public static class Converter implements AttributeConverter<OptionType, Integer> {
+    public static class Converter implements AttributeConverter<PermissionType, Integer> {
 
         @Override
-        public Integer convertToDatabaseColumn(OptionType attribute) {
+        public Integer convertToDatabaseColumn(PermissionType attribute) {
             return attribute.getValue();
         }
 
         @Override
-        public OptionType convertToEntityAttribute(Integer dbData) {
+        public PermissionType convertToEntityAttribute(Integer dbData) {
             return Stream.of(values())
                     .filter(e -> e.getValue().equals(dbData))
                     .findAny()
-                    .orElse(OptionType.NONE);
+                    .orElse(PermissionType.NONE);
         }
     }
 }

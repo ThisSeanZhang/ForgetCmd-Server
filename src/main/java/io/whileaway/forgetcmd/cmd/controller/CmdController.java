@@ -5,6 +5,9 @@ import io.whileaway.forgetcmd.cmd.entities.CmdParam;
 import io.whileaway.forgetcmd.cmd.entities.Command;
 import io.whileaway.forgetcmd.cmd.response.SearchCmdResponse;
 import io.whileaway.forgetcmd.cmd.task.CmdTask;
+import io.whileaway.forgetcmd.rbac.annotation.NeedPermit;
+import io.whileaway.forgetcmd.rbac.enums.PermissionType;
+import io.whileaway.forgetcmd.rbac.enums.ResourceType;
 import io.whileaway.forgetcmd.util.Result;
 import io.whileaway.forgetcmd.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,7 @@ public class CmdController {
     }
 
     @GetMapping("/{cid}")
+    @NeedPermit(resourceId = "cid", permission = PermissionType.GET, type = ResourceType.CMD)
     public Result<Command> getCommand(@PathVariable("cid") Long cid){
         return ResultUtil.success(commandTask.findById(cid));
     }

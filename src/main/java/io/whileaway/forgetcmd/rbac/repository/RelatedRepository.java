@@ -1,7 +1,6 @@
 package io.whileaway.forgetcmd.rbac.repository;
 
 import io.whileaway.forgetcmd.rbac.entites.ResourceRelated;
-import io.whileaway.forgetcmd.rbac.enums.OptionType;
 import io.whileaway.forgetcmd.util.BaseRepository;
 import org.springframework.stereotype.Repository;
 

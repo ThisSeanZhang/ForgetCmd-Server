@@ -1,7 +1,7 @@
 package io.whileaway.forgetcmd.rbac.service.impl;
 
 import io.whileaway.forgetcmd.rbac.entites.ResourceRelated;
-import io.whileaway.forgetcmd.rbac.enums.OptionType;
+import io.whileaway.forgetcmd.rbac.enums.PermissionType;
 import io.whileaway.forgetcmd.rbac.enums.RelatedError;
 import io.whileaway.forgetcmd.rbac.repository.RelatedRepository;
 import io.whileaway.forgetcmd.rbac.service.RelatedService;
@@ -23,12 +23,12 @@ public class RelatedServiceImpl implements RelatedService {
     }
 
     @Override
-    public void createRelated(Long resourceId, Long did, List<OptionType> types) {
+    public void createRelated(Long resourceId, Long did, List<PermissionType> types) {
         if(Objects.isNull(resourceId) || Objects.isNull(did) || Objects.isNull(types)) {
             RelatedError.PARAM_ERROR.throwThis();
         }
         String permit = types.stream()
-                .map(OptionType::getType)
+                .map(PermissionType::getType)
                 .collect(Collectors.joining(","));
         if (!permit.isEmpty()) {
             repository.save(new ResourceRelated(did, resourceId, permit));
@@ -36,7 +36,7 @@ public class RelatedServiceImpl implements RelatedService {
     }
 
     @Override
-    public boolean checkPermit(Long resourceId, Long did, OptionType type) {
+    public boolean checkPermit(Long resourceId, Long did, PermissionType type) {
         if (Objects.isNull(type)) return false;
         List<ResourceRelated> relates = new QueryListBuilder<ResourceRelated>()
                 .appendCondition(RelatedSpec.developerId(() -> did))
@@ -48,7 +48,7 @@ public class RelatedServiceImpl implements RelatedService {
     }
 
     @Override
-    public void removeRelate(Long resourceId, Long did, List<OptionType> types) {
+    public void removeRelate(Long resourceId, Long did, List<PermissionType> types) {
 
     }
 }

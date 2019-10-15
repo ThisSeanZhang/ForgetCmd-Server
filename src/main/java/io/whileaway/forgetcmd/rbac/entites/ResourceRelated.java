@@ -1,6 +1,5 @@
 package io.whileaway.forgetcmd.rbac.entites;
 
-import io.whileaway.forgetcmd.rbac.enums.OptionType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

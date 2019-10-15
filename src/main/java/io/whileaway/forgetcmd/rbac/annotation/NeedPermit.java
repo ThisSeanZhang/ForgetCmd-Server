@@ -1,6 +1,6 @@
 package io.whileaway.forgetcmd.rbac.annotation;
 
-import io.whileaway.forgetcmd.rbac.enums.OptionType;
+import io.whileaway.forgetcmd.rbac.enums.PermissionType;
 import io.whileaway.forgetcmd.rbac.enums.ResourceType;
 
 import java.lang.annotation.*;
@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD})
 @Documented
 public @interface NeedPermit {
-    String pathKey();
-    OptionType operator();
+    String resourceId();
+    PermissionType permission();
     ResourceType type();
 }
