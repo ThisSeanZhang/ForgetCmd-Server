@@ -1,9 +1,16 @@
 package io.whileaway.forgetcmd.rbac.enums;
 
 
+import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
+
+import javax.persistence.AttributeConverter;
+import java.util.stream.Stream;
+
 public enum ResourceType {
 
-    CMD(1, "CMD");
+    UNDEFINED(0, "UNDEFINED"),
+    CMD(1, "CMD")
+    ;
 
     private Integer type;
     private String description;
@@ -20,5 +27,21 @@ public enum ResourceType {
 
     public String getDescription() {
         return description;
+    }
+
+    public static class Converter implements AttributeConverter<ResourceType, Integer> {
+
+        @Override
+        public Integer convertToDatabaseColumn(ResourceType attribute) {
+            return attribute.getType();
+        }
+
+        @Override
+        public ResourceType convertToEntityAttribute(Integer dbData) {
+            return Stream.of(values())
+                    .filter(e -> e.getType().equals(dbData))
+                    .findAny()
+                    .orElse(ResourceType.UNDEFINED);
+        }
     }
 }

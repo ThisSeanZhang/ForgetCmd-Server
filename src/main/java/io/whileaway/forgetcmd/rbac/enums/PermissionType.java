@@ -1,6 +1,8 @@
 package io.whileaway.forgetcmd.rbac.enums;
 
 import javax.persistence.AttributeConverter;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum PermissionType {
@@ -49,5 +51,11 @@ public enum PermissionType {
                     .findAny()
                     .orElse(PermissionType.NONE);
         }
+    }
+
+    public static List<PermissionType> findPermissionByValues(List<Integer> invals) {
+        return Stream.of(values())
+                .filter(t -> invals.contains(t.value))
+                .collect(Collectors.toList());
     }
 }

@@ -19,7 +19,15 @@ public class ParamInspect<T> {
     public<A> A convert(Function<T, A> convert) {
         return convert.apply(target);
     }
-    public static boolean nonNullLong(Supplier<Long> l) {
-        return Objects.nonNull(l);
+
+    // 基础使用方式
+    private static boolean nonNullLong(Supplier<Long> l) {
+        return Objects.nonNull(l.get());
     }
+    public static boolean isNullLong(Supplier<Long> l) {
+        return !nonNullLong(l);
+    }
+
+    public static boolean nonNullObject(Supplier o) {return !isNullObject(o);}
+    public static boolean isNullObject(Supplier o) {return Objects.isNull(o.get());}
 }

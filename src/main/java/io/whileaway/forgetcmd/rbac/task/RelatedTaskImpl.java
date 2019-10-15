@@ -1,11 +1,10 @@
 package io.whileaway.forgetcmd.rbac.task;
 
 import io.whileaway.forgetcmd.rbac.enums.PermissionType;
+import io.whileaway.forgetcmd.rbac.request.CreateRelatedRequest;
+import io.whileaway.forgetcmd.rbac.request.PermitCheckRequest;
 import io.whileaway.forgetcmd.rbac.service.RelatedService;
 import org.springframework.stereotype.Component;
-
-import java.util.Collections;
-import java.util.List;
 
 @Component
 public class RelatedTaskImpl implements RelatedTask {
@@ -17,18 +16,13 @@ public class RelatedTaskImpl implements RelatedTask {
     }
 
     @Override
-    public void createRelated(Long resourceId, Long did, PermissionType type) {
-        relatedService.createRelated(resourceId, did, Collections.singletonList(type));
+    public void createRelated(CreateRelatedRequest request) {
+        relatedService.createRelated(request);
     }
 
     @Override
-    public void createRelated(Long resourceId, Long did, List<PermissionType> types) {
-        relatedService.createRelated(resourceId, did, types);
-    }
-
-    @Override
-    public boolean checkPermit(Long resourceId, Long did, PermissionType type) {
-        return false;
+    public boolean checkPermit(PermitCheckRequest request) {
+        return relatedService.checkPermit(request);
     }
 
     @Override

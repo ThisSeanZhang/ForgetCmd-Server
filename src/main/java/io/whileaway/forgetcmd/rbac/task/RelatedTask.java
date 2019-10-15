@@ -1,16 +1,16 @@
 package io.whileaway.forgetcmd.rbac.task;
 
 import io.whileaway.forgetcmd.rbac.enums.PermissionType;
+import io.whileaway.forgetcmd.rbac.request.CreateRelatedRequest;
+import io.whileaway.forgetcmd.rbac.request.PermitCheckRequest;
 
 import java.util.List;
 
 public interface RelatedTask {
 
-    void createRelated(Long resourceId, Long did, PermissionType type);
+    void createRelated(CreateRelatedRequest request);
 
-    void createRelated(Long resourceId, Long did, List<PermissionType> types);
-
-    boolean checkPermit(Long resourceId, Long did, PermissionType type);
+    boolean checkPermit(PermitCheckRequest request);
 
     void removeRelate(Long resourceId, Long did, PermissionType type);
 }

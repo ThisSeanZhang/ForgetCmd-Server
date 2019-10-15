@@ -1,5 +1,7 @@
 package io.whileaway.forgetcmd.rbac.entites;
 
+import io.whileaway.forgetcmd.rbac.enums.ResourceType;
+import io.whileaway.forgetcmd.rbac.request.CreateRelatedRequest;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,10 +17,13 @@ public class ResourceRelated {
     private Long did;
     private Long resourceId;
     private String permit;
+    @Convert(converter = ResourceType.Converter.class)
+    private ResourceType type;
 
-    public ResourceRelated(Long did, Long resourceId, String permit) {
-        this.did = did;
-        this.resourceId = resourceId;
-        this.permit = permit;
+    public ResourceRelated(CreateRelatedRequest request) {
+        this.did = request.getDid();
+        this.resourceId = request.getResourceId();
+        this.permit = request.convertPermits2String();
+        this.type = request.getType();
     }
 }
