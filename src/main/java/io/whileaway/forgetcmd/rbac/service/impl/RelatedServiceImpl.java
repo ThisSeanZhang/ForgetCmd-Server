@@ -5,6 +5,8 @@ import io.whileaway.forgetcmd.rbac.enums.OptionType;
 import io.whileaway.forgetcmd.rbac.enums.RelatedError;
 import io.whileaway.forgetcmd.rbac.repository.RelatedRepository;
 import io.whileaway.forgetcmd.rbac.service.RelatedService;
+import io.whileaway.forgetcmd.rbac.specs.RelatedSpec;
+import io.whileaway.forgetcmd.util.spec.QueryListBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,9 +37,14 @@ public class RelatedServiceImpl implements RelatedService {
 
     @Override
     public boolean checkPermit(Long resourceId, Long did, OptionType type) {
-        List<ResourceRelated> results = repository.findAllByDidAndResourceId(did, resourceId);
-        if(re)
-        return !results.isEmpty();
+        if (Objects.isNull(type)) return false;
+        List<ResourceRelated> relates = new QueryListBuilder<ResourceRelated>()
+                .appendCondition(RelatedSpec.developerId(() -> did))
+                .appendCondition(RelatedSpec.checkResourceId(() -> resourceId))
+                .appendCondition(RelatedSpec.hasPermit(type::getValue))
+                .findFrom(repository::findAll)
+                .primitive();
+        return !relates.isEmpty();
     }
 
     @Override
