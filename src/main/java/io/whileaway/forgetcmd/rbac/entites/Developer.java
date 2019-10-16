@@ -1,6 +1,7 @@
 package io.whileaway.forgetcmd.rbac.entites;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.whileaway.forgetcmd.rbac.enums.DeveloperStatus;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,7 +20,9 @@ public class Developer {
     private String pass;
     @Column(length = 50, nullable = false)
     private String email;
-    private Integer status;
+
+    @Convert(converter = DeveloperStatus.Converter.class)
+    private DeveloperStatus status;
     @JsonIgnore
     private String salt;
 

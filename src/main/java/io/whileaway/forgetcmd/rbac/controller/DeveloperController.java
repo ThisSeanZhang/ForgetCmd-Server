@@ -21,9 +21,6 @@ public class DeveloperController {
 
     @GetMapping("/developer-name/{key}")
     public Result matchTheWholeNameOrEmail(@PathVariable("key") String key) {
-        if (ParamInspect.unValidString(key)) {
-            CommonErrorEnum.PARAM_ERROR.throwThis();
-        }
         return rbacTask.existNameOrEmail(key)
                 ? ResultUtil.success()
                 : ResultUtil.error(CommonErrorEnum.NOT_FOUND.getException());

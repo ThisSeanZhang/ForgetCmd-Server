@@ -1,10 +1,13 @@
 package io.whileaway.forgetcmd.rbac.enums;
 
+import lombok.Getter;
+
 import javax.persistence.AttributeConverter;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Getter
 public enum PermissionType {
 
     NONE("undefined", 0),
@@ -19,22 +22,6 @@ public enum PermissionType {
     PermissionType(String string, int i) {
         this.type = string;
         this.value = i;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Integer getValue() {
-        return value;
-    }
-
-    public void setValue(Integer value) {
-        this.value = value;
     }
 
     public static class Converter implements AttributeConverter<PermissionType, Integer> {
