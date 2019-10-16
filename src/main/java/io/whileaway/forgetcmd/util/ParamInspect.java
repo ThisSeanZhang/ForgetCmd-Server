@@ -30,4 +30,12 @@ public class ParamInspect<T> {
 
     public static boolean nonNullObject(Supplier o) {return !isNullObject(o);}
     public static boolean isNullObject(Supplier o) {return Objects.isNull(o.get());}
+    public static boolean validString(String str) {
+        return Objects.nonNull(str) && !str.isBlank() && !str.isEmpty();
+    }
+
+    public static boolean unValidString(String str) {
+        return !validString(str);
+    }
+
 }

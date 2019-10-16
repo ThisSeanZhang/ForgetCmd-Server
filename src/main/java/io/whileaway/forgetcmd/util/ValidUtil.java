@@ -1,6 +1,7 @@
 package io.whileaway.forgetcmd.util;
 
 
+import io.whileaway.forgetcmd.rbac.SessionKeyConstant;
 import io.whileaway.forgetcmd.rbac.entites.Developer;
 import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
 import io.whileaway.forgetcmd.util.exception.CommonException;
@@ -28,7 +29,7 @@ public class ValidUtil {
 
     public Developer getCurrentDeveloper () {
 //        SessionKeyConstant.CURRENT_DEVELOPER
-        Object currentDeveloper = session.getAttribute("currentDeveloper");
+        Object currentDeveloper = session.getAttribute(SessionKeyConstant.CURRENT_DEVELOPER);
         if (Objects.nonNull(currentDeveloper) && currentDeveloper instanceof Developer) {
             return (Developer) currentDeveloper;
         }
