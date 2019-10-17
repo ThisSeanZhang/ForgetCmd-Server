@@ -1,10 +1,9 @@
 package io.whileaway.forgetcmd.cmd.entities;
 
+import io.whileaway.forgetcmd.cmd.enums.CommandStatus;
 import lombok.Data;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -22,4 +21,6 @@ public class Command {
     private String whenDeprecated;
     private String whenEnable;
     private Long frequency;
+    @Convert(converter = CommandStatus.Converter.class)
+    private CommandStatus status;
 }

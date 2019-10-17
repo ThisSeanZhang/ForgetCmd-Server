@@ -14,4 +14,6 @@ public interface CmdAddLogTask {
     List<CmdAddLog> searchAddLog(AddLogSearchRequest request);
 
     CmdAddLog findById(Long id);
+
+    void passTheLog(Long cid);
 }

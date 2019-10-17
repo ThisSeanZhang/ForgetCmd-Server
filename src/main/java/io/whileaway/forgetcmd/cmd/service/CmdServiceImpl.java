@@ -5,6 +5,7 @@ import io.whileaway.forgetcmd.cmd.repository.CommandRepository;
 import io.whileaway.forgetcmd.cmd.response.SearchCmdResponse;
 import io.whileaway.forgetcmd.cmd.specs.CommandSpec;
 import io.whileaway.forgetcmd.util.BaseRepository;
+import io.whileaway.forgetcmd.util.spec.QueryListBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,6 @@ public class CmdServiceImpl implements CmdService {
 
     private final CommandRepository commandRepository;
 
-    @Autowired
     public CmdServiceImpl(CommandRepository commandRepository) {
         this.commandRepository = commandRepository;
     }
@@ -30,14 +30,13 @@ public class CmdServiceImpl implements CmdService {
 
     @Override
     public List<SearchCmdResponse> searchByKeyWord(String keyword) {
-        Optional<List<Command>> all = Optional.ofNullable(commandRepository.findAll(CommandSpec.fuzzyMatch(keyword)));
-        return all.orElseGet(ArrayList::new).stream()
-                .map(cmd-> {
-                    SearchCmdResponse value = new SearchCmdResponse();
-                    value.setCid(cmd.getCid());
-                    value.setCommandName(cmd.getCommandName());
-                    value.setBriefDesc(cmd.getBriefDesc());
-                    return value;
-                }).collect(Collectors.toList());
+        return new QueryListBuilder<Command>()
+                .appendCondition(CommandSpec::normal)
+                .appendCondition(CommandSpec.fuzzyMatch(keyword))
+                .sortBy(CommandSpec::moreFrequency)
+                .findFrom(commandRepository::findAll)
+                .stream()
+                .map(SearchCmdResponse::convertFrom)
+                .collect(Collectors.toList());
     }
 }

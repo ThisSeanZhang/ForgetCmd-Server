@@ -1,5 +1,7 @@
 package io.whileaway.forgetcmd.verify.entities;
 
+import io.whileaway.forgetcmd.cmd.entities.Command;
+import io.whileaway.forgetcmd.cmd.request.CreateCmdRequest;
 import io.whileaway.forgetcmd.verify.enums.AddLogStatus;
 import io.whileaway.forgetcmd.verify.response.CmdAddLogBriefResponse;
 import lombok.Data;
@@ -21,7 +23,7 @@ public class CmdAddLog {
     private Integer argNum;
     private String whenDeprecated;
     private String whenEnable;
-    private Long frequency;
+    private Long cid;
     private AddLogStatus status;
 
     @Column(columnDefinition="text")
@@ -40,8 +42,24 @@ public class CmdAddLog {
         response.setArgNum(argNum);
         response.setWhenDeprecated(description);
         response.setWhenEnable(whenEnable);
-        response.setFrequency(frequency);
         response.setStatus(status);
         return response;
+    }
+
+    public CreateCmdRequest createCommandRequest() {
+        Command cmd = new Command();
+        cmd.setCommandName(commandName);
+        cmd.setBriefDesc(briefDesc);
+        cmd.setDescription(description);
+        cmd.setVersion(version);
+        cmd.setPlatform(platform);
+        cmd.setArgNum(argNum);
+        cmd.setWhenDeprecated(whenDeprecated);
+        cmd.setWhenEnable(whenEnable);
+        CreateCmdRequest request = new CreateCmdRequest();
+        request.setCommand(cmd);
+        request.setOptions(cmdOptions);
+        request.setParams(cmdParams);
+        return request;
     }
 }

@@ -3,6 +3,7 @@ package io.whileaway.forgetcmd.verify.controller;
 import io.whileaway.forgetcmd.util.Result;
 import io.whileaway.forgetcmd.util.ResultUtil;
 import io.whileaway.forgetcmd.verify.entities.CmdAddLog;
+import io.whileaway.forgetcmd.verify.enums.AddLogStatus;
 import io.whileaway.forgetcmd.verify.request.AddLogSearchRequest;
 import io.whileaway.forgetcmd.verify.request.CmdAddRequest;
 import io.whileaway.forgetcmd.verify.response.CmdAddLogBriefResponse;
@@ -36,4 +37,11 @@ public class CmdAddLogController {
     public Result<List<CmdAddLog>> getAll(AddLogSearchRequest request) {
         return ResultUtil.success(task.searchAddLog(request));
     }
+
+    @PutMapping("/cmds/{cid}/pass")
+    public Result changeStatus(@PathVariable("cid") Long cid) {
+        task.passTheLog(cid);
+        return ResultUtil.success();
+    }
+
 }

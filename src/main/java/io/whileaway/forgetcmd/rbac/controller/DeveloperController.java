@@ -10,7 +10,7 @@ import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/developer")
+@RequestMapping("/developers")
 public class DeveloperController {
 
     private final RBACTask rbacTask;

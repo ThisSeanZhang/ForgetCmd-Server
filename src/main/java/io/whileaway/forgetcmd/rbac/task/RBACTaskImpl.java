@@ -1,13 +1,12 @@
 package io.whileaway.forgetcmd.rbac.task;
 
-import io.whileaway.forgetcmd.rbac.SessionKeyConstant;
+import io.whileaway.forgetcmd.rbac.RBACConstant;
 import io.whileaway.forgetcmd.rbac.entites.Developer;
 import io.whileaway.forgetcmd.rbac.enums.DeveloperError;
-import io.whileaway.forgetcmd.rbac.enums.DeveloperStatus;
 import io.whileaway.forgetcmd.rbac.request.CreateAccount;
 import io.whileaway.forgetcmd.rbac.request.CreateSession;
 import io.whileaway.forgetcmd.rbac.service.DeveloperService;
-import io.whileaway.forgetcmd.util.Crypto;
+import io.whileaway.forgetcmd.rbac.Crypto;
 import io.whileaway.forgetcmd.util.ParamInspect;
 import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
 import org.springframework.stereotype.Service;
@@ -31,23 +30,17 @@ public class RBACTaskImpl implements RBACTask {
     public Developer createSession(CreateSession createSession) {
         List<Developer> developers = developerService.matchTheWholeNameOrEmail(createSession.getNameOrEmail());
         developers = developers.stream()
-                .filter(developer -> DeveloperStatus.NORMAL == developer.getStatus())
-                .filter(developer ->
-                        developer.getPass().equals(
-                                Crypto.cryptoPass(createSession.getPass(), developer.getSalt())
-                        )
-                ).collect(Collectors.toList());
-        // 先判断是否为空
+                .filter(developer -> Crypto.verifyThePass(developer, createSession.getPass()))
+                .collect(Collectors.toList());
         if (developers.isEmpty()) DeveloperError.NAME_OR_EMAIL_OR_PASS_ERROR.throwThis();
-        // 再判断是否有多匹配了
         if (developers.size() > 1) CommonErrorEnum.SERVER_ERROR.throwThis();
-        session.setAttribute(SessionKeyConstant.CURRENT_DEVELOPER, developers.get(0));
+        session.setAttribute(RBACConstant.CURRENT_DEVELOPER, developers.get(0));
         return developers.get(0);
     }
 
     @Override
     public Developer createAccount(CreateAccount createAccount) {
-        return null;
+        return developerService.registerDeveloper(createAccount.convertDeveloper());
     }
 
     @Override

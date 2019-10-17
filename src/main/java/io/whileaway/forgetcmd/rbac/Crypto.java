@@ -1,6 +1,7 @@
-package io.whileaway.forgetcmd.util;
+package io.whileaway.forgetcmd.rbac;
 
 import io.whileaway.forgetcmd.rbac.entites.Developer;
+import io.whileaway.forgetcmd.util.ParamInspect;
 import org.apache.shiro.crypto.hash.Md5Hash;
 
 import java.util.Arrays;
@@ -24,14 +25,21 @@ public class Crypto {
 	public static void cryptoDeveloperPass (Developer developer) {
 		if (Objects.isNull(developer)) return;
 		developer.setSalt(getSalt(developer.getPass()));
-		developer.setPass(cryptoPass(developer.getPass(), developer.getSalt()));
+		developer.setPass(cryptoPass(developer::getPass, developer::getSalt));
 	}
-	public static String cryptoPass(String pass, String salt) {
+
+	private static String cryptoPass(String pass, String salt) {
 		return new Md5Hash(pass, salt, CRYPTO_TIMES).toString();
 	}
 
-	public static String cryptoPass(Supplier<String> pass, Supplier<String> salt) {
+	private static String cryptoPass(Supplier<String> pass, Supplier<String> salt) {
 		return cryptoPass(pass.get(), salt.get());
+	}
+
+	public static Boolean verifyThePass(Developer developer, String inPass) {
+		if (ParamInspect.unValidString(inPass) || Objects.isNull(developer)) return false;
+		String cryptoInPass = cryptoPass(inPass, developer.getSalt());
+		return developer.getPass().equals(cryptoInPass);
 	}
 
 

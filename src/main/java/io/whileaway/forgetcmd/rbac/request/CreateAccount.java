@@ -1,5 +1,6 @@
 package io.whileaway.forgetcmd.rbac.request;
 
+import io.whileaway.forgetcmd.rbac.entites.Developer;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -22,4 +23,12 @@ public class CreateAccount {
     @NotBlank(message = "email不能为空")
     private String email;
 
+
+    public Developer convertDeveloper() {
+        Developer developer = new Developer();
+        developer.setNickname( nickName );
+        developer.setEmail(email);
+        developer.setPass(pass);
+        return developer;
+    }
 }

@@ -1,11 +1,9 @@
 package io.whileaway.forgetcmd.util;
 
 
-import io.whileaway.forgetcmd.rbac.SessionKeyConstant;
+import io.whileaway.forgetcmd.rbac.RBACConstant;
 import io.whileaway.forgetcmd.rbac.entites.Developer;
 import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
-import io.whileaway.forgetcmd.util.exception.CommonException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerMapping;
 
@@ -28,8 +26,8 @@ public class ValidUtil {
     }
 
     public Developer getCurrentDeveloper () {
-//        SessionKeyConstant.CURRENT_DEVELOPER
-        Object currentDeveloper = session.getAttribute(SessionKeyConstant.CURRENT_DEVELOPER);
+//        RBACConstant.CURRENT_DEVELOPER
+        Object currentDeveloper = session.getAttribute(RBACConstant.CURRENT_DEVELOPER);
         if (Objects.nonNull(currentDeveloper) && currentDeveloper instanceof Developer) {
             return (Developer) currentDeveloper;
         }

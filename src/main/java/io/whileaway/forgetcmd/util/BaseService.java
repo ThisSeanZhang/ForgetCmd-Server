@@ -3,6 +3,7 @@ package io.whileaway.forgetcmd.util;
 import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -11,6 +12,11 @@ public interface BaseService<A, B> {
     default A save(A a) {
         if(Objects.isNull(a)) CommonErrorEnum.PARAM_ERROR.throwThis();
         return getRepository().save(a);
+    }
+
+    default List<A> saveAll(List<A> a) {
+        if(Objects.isNull(a)) CommonErrorEnum.PARAM_ERROR.throwThis();
+        return getRepository().saveAll(a);
     }
 
     default Optional<A> findById(B b) {

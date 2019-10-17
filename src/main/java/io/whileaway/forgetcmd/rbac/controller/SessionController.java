@@ -1,6 +1,5 @@
 package io.whileaway.forgetcmd.rbac.controller;
 
-import io.whileaway.forgetcmd.rbac.SessionKeyConstant;
 import io.whileaway.forgetcmd.rbac.entites.Developer;
 import io.whileaway.forgetcmd.rbac.request.CreateSession;
 import io.whileaway.forgetcmd.rbac.task.RBACTask;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.whileaway.forgetcmd.util.ResultUtil;
 
 @RestController
-@RequestMapping("/session")
+@RequestMapping("/sessions")
 public class SessionController {
 
     private final RBACTask rbacTask;

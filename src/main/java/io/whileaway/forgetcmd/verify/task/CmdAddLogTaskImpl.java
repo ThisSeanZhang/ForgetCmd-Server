@@ -1,23 +1,26 @@
 package io.whileaway.forgetcmd.verify.task;
 
+import io.whileaway.forgetcmd.cmd.entities.Command;
+import io.whileaway.forgetcmd.cmd.task.CmdTask;
 import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
 import io.whileaway.forgetcmd.verify.entities.CmdAddLog;
 import io.whileaway.forgetcmd.verify.request.AddLogSearchRequest;
 import io.whileaway.forgetcmd.verify.request.CmdAddRequest;
-import io.whileaway.forgetcmd.verify.response.CmdAddLogBriefResponse;
 import io.whileaway.forgetcmd.verify.service.CmdAddLogService;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class CmdAddLogTaskImpl implements CmdAddLogTask {
 
     private final CmdAddLogService service;
+    private final CmdTask cmdTask;
 
-    public CmdAddLogTaskImpl(CmdAddLogService service) {
+    public CmdAddLogTaskImpl(CmdAddLogService service, CmdTask cmdTask) {
         this.service = service;
+        this.cmdTask = cmdTask;
     }
 
     @Override
@@ -34,5 +37,14 @@ public class CmdAddLogTaskImpl implements CmdAddLogTask {
     @Override
     public CmdAddLog findById(Long id) {
         return service.findById(id).orElseThrow(CommonErrorEnum.NOT_FOUND::getException);
+    }
+
+    @Override
+    @Transactional
+    public void passTheLog(Long cid) {
+        CmdAddLog addLog = findById(cid);
+        Command cmd = cmdTask.createCmd(addLog.createCommandRequest());
+        addLog.setCid(cmd.getCid());
+        service.save(addLog);
     }
 }
