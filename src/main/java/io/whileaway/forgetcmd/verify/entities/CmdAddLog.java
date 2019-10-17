@@ -25,6 +25,8 @@ public class CmdAddLog {
     private String whenEnable;
     private Long cid;
     private AddLogStatus status;
+    private String whoCreated;
+    private Long creatorId;
 
     @Column(columnDefinition="text")
     private String cmdOptions;
@@ -56,6 +58,8 @@ public class CmdAddLog {
         cmd.setArgNum(argNum);
         cmd.setWhenDeprecated(whenDeprecated);
         cmd.setWhenEnable(whenEnable);
+        cmd.setCreatorId(creatorId);
+        cmd.setWhoCreated(whoCreated);
         CreateCmdRequest request = new CreateCmdRequest();
         request.setCommand(cmd);
         request.setOptions(cmdOptions);

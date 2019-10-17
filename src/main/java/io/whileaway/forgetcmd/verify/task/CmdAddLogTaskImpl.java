@@ -4,6 +4,7 @@ import io.whileaway.forgetcmd.cmd.entities.Command;
 import io.whileaway.forgetcmd.cmd.task.CmdTask;
 import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
 import io.whileaway.forgetcmd.verify.entities.CmdAddLog;
+import io.whileaway.forgetcmd.verify.enums.AddLogStatus;
 import io.whileaway.forgetcmd.verify.request.AddLogSearchRequest;
 import io.whileaway.forgetcmd.verify.request.CmdAddRequest;
 import io.whileaway.forgetcmd.verify.service.CmdAddLogService;
@@ -45,6 +46,7 @@ public class CmdAddLogTaskImpl implements CmdAddLogTask {
         CmdAddLog addLog = findById(cid);
         Command cmd = cmdTask.createCmd(addLog.createCommandRequest());
         addLog.setCid(cmd.getCid());
+        addLog.setStatus(AddLogStatus.CREATE_SUCCESS);
         service.save(addLog);
     }
 }

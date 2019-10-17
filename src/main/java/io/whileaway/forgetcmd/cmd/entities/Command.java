@@ -23,4 +23,6 @@ public class Command {
     private Long frequency;
     @Convert(converter = CommandStatus.Converter.class)
     private CommandStatus status;
+    private String whoCreated;
+    private Long creatorId;
 }
