@@ -45,4 +45,8 @@ public enum PermissionType {
                 .filter(t -> invals.contains(t.value))
                 .collect(Collectors.toList());
     }
+
+    public static List<PermissionType> allPermission() {
+        return List.of(values());
+    }
 }

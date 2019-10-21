@@ -1,15 +1,14 @@
 package io.whileaway.forgetcmd.rbac.enums;
 
 
-import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
-
 import javax.persistence.AttributeConverter;
 import java.util.stream.Stream;
 
 public enum ResourceType {
 
     UNDEFINED(0, "UNDEFINED"),
-    CMD(1, "CMD")
+    CMD(1, "CMD"),
+    VERIFY(2, "待验证命令")
     ;
 
     private Integer type;

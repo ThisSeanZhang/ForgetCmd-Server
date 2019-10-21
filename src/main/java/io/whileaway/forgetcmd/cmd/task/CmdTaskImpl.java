@@ -20,9 +20,11 @@ import java.util.stream.Collectors;
 
 @Component
 public class CmdTaskImpl implements CmdTask {
+
     private final CmdService cmdService;
     private final OptionService optionService;
     private final CmdParamService paramService;
+
     @Autowired
     public CmdTaskImpl(CmdService cmdService, OptionService optionService, CmdParamService paramService) {
         this.cmdService = cmdService;
