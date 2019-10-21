@@ -30,13 +30,20 @@ public class CmdServiceImpl implements CmdService {
 
     @Override
     public List<SearchCmdResponse> searchByKeyWord(String keyword) {
+//        return new QueryListBuilder<Command>()
+//                .appendCondition(CommandSpec::normal)
+//                .appendCondition(CommandSpec.fuzzyMatch(keyword))
+//                .sortBy(CommandSpec::moreFrequency)
+//                .findFrom(commandRepository::findAll)
+//                .stream()
+//                .map(SearchCmdResponse::convertFrom)
+//                .collect(Collectors.toList());
         return new QueryListBuilder<Command>()
-                .appendCondition(CommandSpec::normal)
-                .appendCondition(CommandSpec.fuzzyMatch(keyword))
-                .sortBy(CommandSpec::moreFrequency)
+                .appendCondition(CommandSpec::testJoin1)
                 .findFrom(commandRepository::findAll)
                 .stream()
                 .map(SearchCmdResponse::convertFrom)
                 .collect(Collectors.toList());
+
     }
 }
