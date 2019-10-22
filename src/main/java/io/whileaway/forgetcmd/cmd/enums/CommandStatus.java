@@ -21,6 +21,9 @@ public enum CommandStatus {
         this.status = string;
     }
 
+    public boolean equalsValue(Integer value) {
+        return this.getCode().equals(value);
+    }
     public static class Converter implements AttributeConverter<CommandStatus, Integer> {
 
         @Override

@@ -5,7 +5,7 @@ import io.whileaway.forgetcmd.commit.enums.CommitStatus;
 import lombok.Data;
 
 @Data
-public class CmdAddRequest {
+public class CommandCommitRequest {
 
     private String commandName;
     private String briefDesc;

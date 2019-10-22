@@ -14,7 +14,15 @@ public class CommandCommit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // commit info
     private Long ccid;
+    private Long createTime;
+    private CommitStatus status;
+    // create info
+    private Long creatorId;
+    private String whoCreated;
+    // command info
+    private Long cid;
     private String commandName;
     private String briefDesc;
     private String description;
@@ -23,11 +31,6 @@ public class CommandCommit {
     private Integer argNum;
     private String whenDeprecated;
     private String whenEnable;
-    private CommitStatus status;
-    private String whoCreated;
-    private Long creatorId;
-    // 关联的Command
-    private Long cid;
 
     @Column(columnDefinition="text")
     private String cmdOptions;

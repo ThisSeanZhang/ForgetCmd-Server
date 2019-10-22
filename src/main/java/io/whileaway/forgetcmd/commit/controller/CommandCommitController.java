@@ -4,34 +4,34 @@ import io.whileaway.forgetcmd.util.Result;
 import io.whileaway.forgetcmd.util.ResultUtil;
 import io.whileaway.forgetcmd.commit.entities.CommandCommit;
 import io.whileaway.forgetcmd.commit.request.AddLogSearchRequest;
-import io.whileaway.forgetcmd.commit.request.CmdAddRequest;
+import io.whileaway.forgetcmd.commit.request.CommandCommitRequest;
 import io.whileaway.forgetcmd.commit.task.CommitTask;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/verifies")
-public class CommitController {
+@RequestMapping("/commits/cmds")
+public class CommandCommitController {
 
     private final CommitTask task;
 
-    public CommitController(CommitTask task) {
+    public CommandCommitController(CommitTask task) {
         this.task = task;
     }
 
-    @PostMapping("/cmds")
-    public Result createAddCommand(@RequestBody CmdAddRequest request) {
-        task.addCmdLog(request);
+    @PostMapping
+    public Result createCommandCommit(@RequestBody CommandCommitRequest request) {
+        task.createCommandCommit(request);
         return ResultUtil.success();
     }
 
-    @GetMapping("/cmds/{cid}")
+    @GetMapping("{cid}")
     public Result<CommandCommit> findAddCommandById(@PathVariable("cid")Long cid) {
         return ResultUtil.success(task.findById(cid));
     }
 
-    @GetMapping("/search")
+    @GetMapping
     public Result<List<CommandCommit>> getAll(AddLogSearchRequest request) {
         return ResultUtil.success(task.searchAddLog(request));
     }

@@ -1,13 +1,16 @@
 package io.whileaway.forgetcmd.commit.enums;
 
 import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
+import lombok.Getter;
 
 import javax.persistence.AttributeConverter;
 import java.util.stream.Stream;
 
+@Getter
 public enum CommitStatus {
     NEED_REVIEW("需要审查", 0),
     CREATE_SUCCESS("创建成功", 1),
+    CREATE_REJECT("拒绝创建", 2),
     ;
     private String status;
     private Integer code;
@@ -15,22 +18,6 @@ public enum CommitStatus {
     CommitStatus(String string, int i) {
         this.status = string;
         this.code = i;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
     }
 
     public static class Converter implements AttributeConverter<CommitStatus, Integer> {
