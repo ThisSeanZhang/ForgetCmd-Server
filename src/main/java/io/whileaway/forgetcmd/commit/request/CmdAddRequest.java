@@ -1,7 +1,7 @@
-package io.whileaway.forgetcmd.verify.request;
+package io.whileaway.forgetcmd.commit.request;
 
-import io.whileaway.forgetcmd.verify.entities.CommandCommit;
-import io.whileaway.forgetcmd.verify.enums.CommitStatus;
+import io.whileaway.forgetcmd.commit.entities.CommandCommit;
+import io.whileaway.forgetcmd.commit.enums.CommitStatus;
 import lombok.Data;
 
 @Data

@@ -1,4 +1,4 @@
-package io.whileaway.forgetcmd.verify.enums;
+package io.whileaway.forgetcmd.commit.enums;
 
 import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
 

@@ -1,20 +1,20 @@
-package io.whileaway.forgetcmd.verify.entities;
+package io.whileaway.forgetcmd.commit.entities;
 
 import io.whileaway.forgetcmd.cmd.entities.Command;
 import io.whileaway.forgetcmd.cmd.request.CreateCmdRequest;
-import io.whileaway.forgetcmd.verify.enums.AddLogStatus;
-import io.whileaway.forgetcmd.verify.response.CmdAddLogBriefResponse;
+import io.whileaway.forgetcmd.commit.enums.CommitStatus;
+import io.whileaway.forgetcmd.commit.response.CmdAddLogBriefResponse;
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Data
 @Entity
-public class CmdAddLog {
+public class CommandCommit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rid;
+    private Long ccid;
     private String commandName;
     private String briefDesc;
     private String description;
@@ -23,10 +23,11 @@ public class CmdAddLog {
     private Integer argNum;
     private String whenDeprecated;
     private String whenEnable;
-    private Long cid;
-    private AddLogStatus status;
+    private CommitStatus status;
     private String whoCreated;
     private Long creatorId;
+    // 关联的Command
+    private Long cid;
 
     @Column(columnDefinition="text")
     private String cmdOptions;
@@ -35,7 +36,7 @@ public class CmdAddLog {
 
     public CmdAddLogBriefResponse convertBrief() {
         CmdAddLogBriefResponse response = new CmdAddLogBriefResponse();
-        response.setRid(rid);
+        response.setRid(ccid);
         response.setCommandName(commandName);
         response.setBriefDesc(briefDesc);
         response.setDescription(description);

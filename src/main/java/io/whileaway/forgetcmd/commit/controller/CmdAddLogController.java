@@ -1,11 +1,11 @@
-package io.whileaway.forgetcmd.verify.controller;
+package io.whileaway.forgetcmd.commit.controller;
 
 import io.whileaway.forgetcmd.util.Result;
 import io.whileaway.forgetcmd.util.ResultUtil;
-import io.whileaway.forgetcmd.verify.entities.CommandCommit;
-import io.whileaway.forgetcmd.verify.request.AddLogSearchRequest;
-import io.whileaway.forgetcmd.verify.request.CmdAddRequest;
-import io.whileaway.forgetcmd.verify.task.CmdAddLogTask;
+import io.whileaway.forgetcmd.commit.entities.CommandCommit;
+import io.whileaway.forgetcmd.commit.request.AddLogSearchRequest;
+import io.whileaway.forgetcmd.commit.request.CmdAddRequest;
+import io.whileaway.forgetcmd.commit.task.CmdAddLogTask;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

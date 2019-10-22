@@ -1,9 +1,9 @@
-package io.whileaway.forgetcmd.verify.task;
+package io.whileaway.forgetcmd.commit.task;
 
 
-import io.whileaway.forgetcmd.verify.entities.CommandCommit;
-import io.whileaway.forgetcmd.verify.request.AddLogSearchRequest;
-import io.whileaway.forgetcmd.verify.request.CmdAddRequest;
+import io.whileaway.forgetcmd.commit.entities.CommandCommit;
+import io.whileaway.forgetcmd.commit.request.AddLogSearchRequest;
+import io.whileaway.forgetcmd.commit.request.CmdAddRequest;
 
 import java.util.List;
 

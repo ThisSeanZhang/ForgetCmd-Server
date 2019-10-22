@@ -1,4 +1,4 @@
-package io.whileaway.forgetcmd.verify.task;
+package io.whileaway.forgetcmd.commit.task;
 
 import io.whileaway.forgetcmd.cmd.entities.Command;
 import io.whileaway.forgetcmd.cmd.task.CmdTask;
@@ -7,11 +7,11 @@ import io.whileaway.forgetcmd.rbac.enums.ResourceType;
 import io.whileaway.forgetcmd.rbac.request.CreateRelatedRequest;
 import io.whileaway.forgetcmd.rbac.task.RelatedTask;
 import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
-import io.whileaway.forgetcmd.verify.entities.CommandCommit;
-import io.whileaway.forgetcmd.verify.enums.CommitStatus;
-import io.whileaway.forgetcmd.verify.request.AddLogSearchRequest;
-import io.whileaway.forgetcmd.verify.request.CmdAddRequest;
-import io.whileaway.forgetcmd.verify.service.CommandCommitService;
+import io.whileaway.forgetcmd.commit.entities.CommandCommit;
+import io.whileaway.forgetcmd.commit.enums.CommitStatus;
+import io.whileaway.forgetcmd.commit.request.AddLogSearchRequest;
+import io.whileaway.forgetcmd.commit.request.CmdAddRequest;
+import io.whileaway.forgetcmd.commit.service.CommandCommitService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

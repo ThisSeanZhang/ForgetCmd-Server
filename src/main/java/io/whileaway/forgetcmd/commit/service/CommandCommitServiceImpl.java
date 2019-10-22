@@ -1,9 +1,9 @@
-package io.whileaway.forgetcmd.verify.service;
+package io.whileaway.forgetcmd.commit.service;
 
 import io.whileaway.forgetcmd.util.BaseRepository;
-import io.whileaway.forgetcmd.verify.entities.CommandCommit;
-import io.whileaway.forgetcmd.verify.repository.CommandCommitRepository;
-import io.whileaway.forgetcmd.verify.request.AddLogSearchRequest;
+import io.whileaway.forgetcmd.commit.entities.CommandCommit;
+import io.whileaway.forgetcmd.commit.repository.CommandCommitRepository;
+import io.whileaway.forgetcmd.commit.request.AddLogSearchRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

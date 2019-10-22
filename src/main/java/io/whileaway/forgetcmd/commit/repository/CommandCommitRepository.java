@@ -1,7 +1,7 @@
-package io.whileaway.forgetcmd.verify.repository;
+package io.whileaway.forgetcmd.commit.repository;
 
 import io.whileaway.forgetcmd.util.BaseRepository;
-import io.whileaway.forgetcmd.verify.entities.CommandCommit;
+import io.whileaway.forgetcmd.commit.entities.CommandCommit;
 import org.springframework.stereotype.Repository;
 
 @Repository
