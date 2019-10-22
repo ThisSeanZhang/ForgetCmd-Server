@@ -1,5 +1,6 @@
 package io.whileaway.forgetcmd.snapshot.entities;
 
+import io.whileaway.forgetcmd.snapshot.enums.ShareType;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,8 +16,8 @@ public class Snapshot {
     private String config;
     private String title;
     private Long createTime;
-    private Boolean isOpen;
-    private Boolean share;
+    @Convert(converter = ShareType.Converter.class)
+    private ShareType share;
     private String shareCode;
     private Boolean allowCopy;
 
