@@ -5,14 +5,14 @@ import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
 import javax.persistence.AttributeConverter;
 import java.util.stream.Stream;
 
-public enum AddLogStatus {
+public enum CommitStatus {
     NEED_REVIEW("需要审查", 0),
     CREATE_SUCCESS("创建成功", 1),
     ;
     private String status;
     private Integer code;
 
-    AddLogStatus(String string, int i) {
+    CommitStatus(String string, int i) {
         this.status = string;
         this.code = i;
     }
@@ -33,15 +33,15 @@ public enum AddLogStatus {
         this.code = code;
     }
 
-    public static class Converter implements AttributeConverter<AddLogStatus, Integer> {
+    public static class Converter implements AttributeConverter<CommitStatus, Integer> {
 
         @Override
-        public Integer convertToDatabaseColumn(AddLogStatus attribute) {
+        public Integer convertToDatabaseColumn(CommitStatus attribute) {
             return attribute.getCode();
         }
 
         @Override
-        public AddLogStatus convertToEntityAttribute(Integer dbData) {
+        public CommitStatus convertToEntityAttribute(Integer dbData) {
             return Stream.of(values())
                     .filter(e -> e.getCode().equals(dbData))
                     .findAny()

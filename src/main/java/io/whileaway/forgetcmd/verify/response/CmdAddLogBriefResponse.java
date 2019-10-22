@@ -1,6 +1,6 @@
 package io.whileaway.forgetcmd.verify.response;
 
-import io.whileaway.forgetcmd.verify.enums.AddLogStatus;
+import io.whileaway.forgetcmd.verify.enums.CommitStatus;
 import lombok.Data;
 
 @Data
@@ -15,5 +15,5 @@ public class CmdAddLogBriefResponse {
     private String whenDeprecated;
     private String whenEnable;
     private Long frequency;
-    private AddLogStatus status;
+    private CommitStatus status;
 }

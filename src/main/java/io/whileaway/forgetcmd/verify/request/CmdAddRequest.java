@@ -1,7 +1,7 @@
 package io.whileaway.forgetcmd.verify.request;
 
-import io.whileaway.forgetcmd.verify.entities.CmdAddLog;
-import io.whileaway.forgetcmd.verify.enums.AddLogStatus;
+import io.whileaway.forgetcmd.verify.entities.CommandCommit;
+import io.whileaway.forgetcmd.verify.enums.CommitStatus;
 import lombok.Data;
 
 @Data
@@ -21,29 +21,29 @@ public class CmdAddRequest {
     private String options;
     private String params;
 
-    public CmdAddLog convertToCmdAddLog() {
+    public CommandCommit convertToCommandCommit() {
 //        ObjectMapper mapper = new ObjectMapper();
-        CmdAddLog log = new CmdAddLog();
-        log.setCommandName(commandName);
-        log.setBriefDesc(briefDesc);
-        log.setDescription(description);
-        log.setVersion(version);
-        log.setPlatform(platform);
-        log.setArgNum(argNum);
-        log.setWhenDeprecated(whenDeprecated);
-        log.setWhenEnable(whenEnable);
+        CommandCommit commit = new CommandCommit();
+        commit.setCommandName(commandName);
+        commit.setBriefDesc(briefDesc);
+        commit.setDescription(description);
+        commit.setVersion(version);
+        commit.setPlatform(platform);
+        commit.setArgNum(argNum);
+        commit.setWhenDeprecated(whenDeprecated);
+        commit.setWhenEnable(whenEnable);
 
-        log.setStatus(AddLogStatus.NEED_REVIEW);
+        commit.setStatus(CommitStatus.NEED_REVIEW);
 
-        log.setCmdOptions(options);
-        log.setCmdParams(params);
+        commit.setCmdOptions(options);
+        commit.setCmdParams(params);
 //        try {
-//            log.setCmdOptions(mapper.writeValueAsString(options));
-//            log.setCmdParams(mapper.writeValueAsString(params));
+//            commit.setCmdOptions(mapper.writeValueAsString(options));
+//            commit.setCmdParams(mapper.writeValueAsString(params));
 //        } catch (JsonProcessingException e) {
 //            e.printStackTrace();
 //            CommonErrorEnum.SERVER_ERROR.throwThis();
 //        }
-        return log;
+        return commit;
     }
 }
