@@ -18,13 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Component
-public class CmdAddLogTaskImpl implements CmdAddLogTask {
+public class CommitTaskImpl implements CommitTask {
 
     private final CommandCommitService service;
     private final CmdTask cmdTask;
     private final RelatedTask relatedTask;
 
-    public CmdAddLogTaskImpl(CommandCommitService service, CmdTask cmdTask, RelatedTask relatedTask) {
+    public CommitTaskImpl(CommandCommitService service, CmdTask cmdTask, RelatedTask relatedTask) {
         this.service = service;
         this.cmdTask = cmdTask;
         this.relatedTask = relatedTask;
