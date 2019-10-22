@@ -27,7 +27,6 @@ public class CmdController {
     }
 
     @GetMapping("/{cid}")
-    @NeedPermit(resourceId = "cid", permission = PermissionType.GET, type = ResourceType.CMD)
     public Result<Command> getCommand(@PathVariable("cid") Long cid){
         return ResultUtil.success(commandTask.findById(cid));
     }
