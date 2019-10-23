@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 //@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 @Getter
-public enum OptionTypeEnum {
+public enum ParamTypeEnum {
     NONE("undefined", 0),
     NUMBER("NUMBER", 1),
     ENUM("ENUM", 2),
@@ -26,7 +26,7 @@ public enum OptionTypeEnum {
     private String type;
     private Integer value;
 
-    OptionTypeEnum(String string, int i) {
+    ParamTypeEnum(String string, int i) {
         this.type = string;
         this.value = i;
     }
@@ -36,26 +36,26 @@ public enum OptionTypeEnum {
         return value;
     }
 
-    public static class Converter implements AttributeConverter<OptionTypeEnum, Integer> {
+    public static class Converter implements AttributeConverter<ParamTypeEnum, Integer> {
 
         @Override
-        public Integer convertToDatabaseColumn(OptionTypeEnum attribute) {
+        public Integer convertToDatabaseColumn(ParamTypeEnum attribute) {
             return attribute.getValue();
         }
 
         @Override
-        public OptionTypeEnum convertToEntityAttribute(Integer dbData) {
+        public ParamTypeEnum convertToEntityAttribute(Integer dbData) {
             return Stream.of(values())
                     .filter(e -> e.getValue().equals(dbData))
                     .findAny()
-                    .orElse(OptionTypeEnum.STRING);
+                    .orElse(ParamTypeEnum.STRING);
         }
     }
 
     public static void main(String[] args) {
         System.out.println(Integer.valueOf(1<<30));
         System.out.println(Integer.toBinaryString(1<<14));
-        System.out.println(OptionTypeEnum.MULTIPLE_MAP.value);
+        System.out.println(ParamTypeEnum.MULTIPLE_MAP.value);
     }
 
     public static List<IntegerKeyValue> getExhibit() {
