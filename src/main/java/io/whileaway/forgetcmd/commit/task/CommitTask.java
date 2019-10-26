@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CommitTask {
 
-    void createCommandCommit(CommandCommitRequest request);
+    CommandCommit createCommandCommit(CommandCommitRequest request);
 
     List<CommandCommit> searchAddLog(AddLogSearchRequest request);
 

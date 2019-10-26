@@ -22,8 +22,7 @@ public class CommandCommitController {
 
     @PostMapping
     public Result createCommandCommit(@RequestBody CommandCommitRequest request) {
-        task.createCommandCommit(request);
-        return ResultUtil.success();
+        return ResultUtil.success(task.createCommandCommit(request));
     }
 
     @GetMapping("{cid}")

@@ -32,13 +32,14 @@ public class CommitTaskImpl implements CommitTask {
 
     @Override
     @Transactional
-    public void createCommandCommit(CommandCommitRequest request) {
+    public CommandCommit createCommandCommit(CommandCommitRequest request) {
         CommandCommit save = service.save(request.convertToCommandCommit());
-        CreateRelatedRequest relatedRequest = new CreateRelatedRequest();
-        relatedRequest.setResourceId(save.getCcid());
-        relatedRequest.setPermits(PermissionType.allPermission());
-        relatedRequest.setType(ResourceType.VERIFY);
-        relatedTask.createRelated(relatedRequest);
+//        CreateRelatedRequest relatedRequest = new CreateRelatedRequest();
+//        relatedRequest.setResourceId(save.getCcid());
+//        relatedRequest.setPermits(PermissionType.allPermission());
+//        relatedRequest.setType(ResourceType.VERIFY);
+//        relatedTask.createRelated(relatedRequest);
+        return save;
     }
 
     @Override
