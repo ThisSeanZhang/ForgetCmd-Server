@@ -18,4 +18,10 @@ public class CmdParam {
     @Convert(converter = ParamTypeEnum.Converter.class)
     private ParamTypeEnum type;
     private boolean required;
+
+
+    public void update(CmdParam inParam) {
+        this.description = inParam.getDescription();
+        this.type = inParam.getType();
+    }
 }

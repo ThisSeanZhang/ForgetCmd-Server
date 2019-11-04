@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,16 +59,14 @@ public class CmdTaskImpl implements CmdTask {
     @Transactional
     public Command createCmd(CreateCmdRequest request) {
         Command cmd = cmdService.save(request.getCommand());
-        paramService.saveAll(request.getParams()
-                .stream()
-                .peek(p->p.setCid(cmd.getCid()))
-                .collect(Collectors.toList())
-        );
-        optionService.saveAll(request.getOptions()
-                .stream()
-                .peek(o -> o.setCid(cmd.getCid()))
-                .collect(Collectors.toList())
-        );
+        List<CmdOption> cmdOptions = optionService.findByCid(cmd.getCid()).orElse(new ArrayList<>());
+        paramService.updateCommandParams(cmd.getCid(), request.getParams());
+        optionService.updateCommandOptions(cmd.getCid(), request.getOptions());
+//        optionService.saveAll(request.getOptions()
+//                .stream()
+//                .peek(o -> o.setCid(cmd.getCid()))
+//                .collect(Collectors.toList())
+//        );
         return cmd;
     }
 }

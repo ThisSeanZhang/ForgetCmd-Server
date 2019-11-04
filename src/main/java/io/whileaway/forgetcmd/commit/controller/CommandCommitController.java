@@ -35,7 +35,7 @@ public class CommandCommitController {
         return ResultUtil.success(task.searchAddLog(request));
     }
 
-    @PutMapping("/cmds/{cid}/pass")
+    @PutMapping("/{cid}/pass")
     public Result changeStatus(@PathVariable("cid") Long cid) {
         task.passTheLog(cid);
         return ResultUtil.success();

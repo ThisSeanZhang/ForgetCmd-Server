@@ -22,4 +22,8 @@ public class CmdOption {
     private Long whenDeprecated;
     private Long whenEnable;
     private Long frequency;
+
+    public void update () {
+
+    }
 }

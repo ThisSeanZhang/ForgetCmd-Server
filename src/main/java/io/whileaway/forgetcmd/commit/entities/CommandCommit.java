@@ -1,6 +1,7 @@
 package io.whileaway.forgetcmd.commit.entities;
 
 import io.whileaway.forgetcmd.cmd.entities.Command;
+import io.whileaway.forgetcmd.cmd.enums.CommandStatus;
 import io.whileaway.forgetcmd.cmd.request.CreateCmdRequest;
 import io.whileaway.forgetcmd.commit.enums.CommitStatus;
 import io.whileaway.forgetcmd.commit.response.CmdAddLogBriefResponse;
@@ -54,6 +55,7 @@ public class CommandCommit {
 
     public CreateCmdRequest createCommandRequest() {
         Command cmd = new Command();
+        cmd.setCid(cid);
         cmd.setCommandName(commandName);
         cmd.setBriefDesc(briefDesc);
         cmd.setDescription(description);
@@ -64,6 +66,7 @@ public class CommandCommit {
         cmd.setWhenEnable(whenEnable);
         cmd.setCreatorId(creatorId);
         cmd.setWhoCreated(whoCreated);
+        cmd.setStatus(CommandStatus.NORMAL);
         CreateCmdRequest request = new CreateCmdRequest();
         request.setCommand(cmd);
         request.setOptions(cmdOptions);
