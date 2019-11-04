@@ -42,7 +42,19 @@ public class CmdParamServiceImpl implements CmdParamService {
                 .filter(Objects::nonNull)
                 .peek(param -> param.update(inParams.get(param.getParamName())))
                 .collect(Collectors.toList());
+        List<CmdParam> deleteParams = dataBaseParams.keySet().stream()
+                .filter( p -> !inParams.containsKey(p))
+                .map(dataBaseParams::get)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        // 删除没有的
+        repository.deleteAll(deleteParams);
+        // 更新已有的
         repository.saveAll(updatedParams);
-        repository.saveAll(params);
+         // 增加没有的
+        repository.saveAll(params.stream()
+                .filter( p -> !dataBaseParams.containsKey(p.getParamName()))
+                .collect(Collectors.toList())
+        );
     }
 }

@@ -23,7 +23,12 @@ public class CmdOption {
     private Long whenEnable;
     private Long frequency;
 
-    public void update () {
-
+    public void update (CmdOption inOption) {
+        this.briefName = inOption.briefName;
+        this.rules = inOption.rules;
+        this.type = inOption.type;
+        this.description = inOption.description;
+        this.whenDeprecated = inOption.whenDeprecated;
+        this.whenEnable = inOption.whenEnable;
     }
 }
