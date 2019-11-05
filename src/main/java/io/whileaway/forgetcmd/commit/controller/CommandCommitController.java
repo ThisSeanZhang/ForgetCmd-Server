@@ -36,8 +36,14 @@ public class CommandCommitController {
     }
 
     @PutMapping("/{cid}/pass")
-    public Result changeStatus(@PathVariable("cid") Long cid) {
+    public Result pass(@PathVariable("cid") Long cid) {
         task.passTheLog(cid);
+        return ResultUtil.success();
+    }
+
+    @PutMapping("/{cid}/reject")
+    public Result reject(@PathVariable("cid") Long cid) {
+        task.rejectTheCommit(cid);
         return ResultUtil.success();
     }
 

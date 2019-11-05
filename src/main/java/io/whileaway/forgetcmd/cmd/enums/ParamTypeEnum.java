@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import javax.persistence.AttributeConverter;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -40,7 +41,7 @@ public enum ParamTypeEnum {
 
         @Override
         public Integer convertToDatabaseColumn(ParamTypeEnum attribute) {
-            return attribute.getValue();
+            return Objects.isNull(attribute) ? ParamTypeEnum.NONE.getValue() : attribute.getValue();
         }
 
         @Override

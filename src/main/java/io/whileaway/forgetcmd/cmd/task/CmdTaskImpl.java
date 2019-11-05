@@ -59,14 +59,8 @@ public class CmdTaskImpl implements CmdTask {
     @Transactional
     public Command createCmd(CreateCmdRequest request) {
         Command cmd = cmdService.save(request.getCommand());
-        List<CmdOption> cmdOptions = optionService.findByCid(cmd.getCid()).orElse(new ArrayList<>());
         paramService.updateCommandParams(cmd.getCid(), request.getParams());
         optionService.updateCommandOptions(cmd.getCid(), request.getOptions());
-//        optionService.saveAll(request.getOptions()
-//                .stream()
-//                .peek(o -> o.setCid(cmd.getCid()))
-//                .collect(Collectors.toList())
-//        );
         return cmd;
     }
 }

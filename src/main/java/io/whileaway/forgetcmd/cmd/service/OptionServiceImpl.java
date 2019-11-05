@@ -5,6 +5,7 @@ import io.whileaway.forgetcmd.cmd.enums.CmdError;
 import io.whileaway.forgetcmd.cmd.repository.CmdOptionRepository;
 import io.whileaway.forgetcmd.util.BaseRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,44 +26,34 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
+    @Transactional
     public void updateCommandOptions(Long cid, List<CmdOption> options) {
-//        List<Long> existOptionId = options.stream()
-//                .filter(Objects::nonNull)
-//                .map(CmdOption::getOid)
-//                .filter(Objects::nonNull)
-//                .collect(Collectors.toList());
-//        List<CmdOption> existOption = repository.findAllById(existOptionId);
-//        Map<Long, CmdOption> inExistOptions = options.stream()
-//                .filter(Objects::nonNull)
-//                .filter(op -> Objects.nonNull(op.getOid()))
-//                .collect(Collectors.toMap(CmdOption::getOid, e -> e));
-//        existOption.stream()
-//                .filter(Objects::nonNull)
-//                .peek(option -> option.update(inExistOptions.get(option.getOid())))
-//        Map<Boolean, List<CmdOption>> newOldGroup = options.stream()
-//                .filter(Objects::nonNull)
-//                .collect(Collectors.groupingBy(op -> Objects.nonNull(op.getOid())));
-
-        Map<String, CmdOption> dataBaseParams = findByCid(cid)
+        Map<String, CmdOption> dataBaseOptions = findByCid(cid)
                 .orElse(new ArrayList<>()).stream().collect(Collectors.toMap(CmdOption::getFullName, e -> e));
-        Map<String, CmdOption> inParams = options.stream()
+        Map<String, CmdOption> inOptions = options.stream()
                 .filter(Objects::nonNull)
                 .collect(Collectors.toMap(CmdOption::getFullName, e -> e));
-        List<CmdOption> updatedParams = dataBaseParams.keySet().stream()
-                .filter(inParams::containsKey)
-                .map(dataBaseParams::get)
+        List<CmdOption> updatedOptions = dataBaseOptions.keySet().stream()
+                .filter(inOptions::containsKey)
+                .map(dataBaseOptions::get)
                 .filter(Objects::nonNull)
-                .peek(option -> option.update(inParams.get(option.getFullName())))
+                .peek(option -> option.update(inOptions.get(option.getFullName())))
                 .collect(Collectors.toList());
-        List<CmdOption> deleteParams = dataBaseParams.keySet().stream()
-                .filter( p -> !inParams.containsKey(p))
-                .map(dataBaseParams::get)
+        List<CmdOption> deleteOptions = dataBaseOptions.keySet().stream()
+                .filter( p -> !inOptions.containsKey(p))
+                .map(dataBaseOptions::get)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         // 删除没有的
-        repository.deleteAll(deleteParams);
-        repository.saveAll(updatedParams);
-        repository.saveAll(options);
+        repository.deleteAll(deleteOptions);
+        // 更新已有的
+        repository.saveAll(updatedOptions);
+        // 新增没有的
+        repository.saveAll(options.stream()
+                .filter( p -> !dataBaseOptions.containsKey(p.getFullName()))
+                .peek( p -> p.setCid(cid))
+                .collect(Collectors.toList())
+        );
     }
 
     @Override

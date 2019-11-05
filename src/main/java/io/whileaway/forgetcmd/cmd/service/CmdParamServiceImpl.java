@@ -32,7 +32,8 @@ public class CmdParamServiceImpl implements CmdParamService {
     @Override
     @Transactional
     public void updateCommandParams(Long cid, List<CmdParam> params) {
-        Map<String, CmdParam> dataBaseParams = findBydCid(cid).orElse(new ArrayList<>()).stream().collect(Collectors.toMap(CmdParam::getParamName, e -> e));
+        Map<String, CmdParam> dataBaseParams = findBydCid(cid)
+                .orElse(new ArrayList<>()).stream().collect(Collectors.toMap(CmdParam::getParamName, e -> e));
         Map<String, CmdParam> inParams = params.stream()
                 .filter(Objects::nonNull)
                 .collect(Collectors.toMap(CmdParam::getParamName, e -> e));
@@ -54,6 +55,7 @@ public class CmdParamServiceImpl implements CmdParamService {
          // 增加没有的
         repository.saveAll(params.stream()
                 .filter( p -> !dataBaseParams.containsKey(p.getParamName()))
+                .peek( p -> p.setCid(cid))
                 .collect(Collectors.toList())
         );
     }

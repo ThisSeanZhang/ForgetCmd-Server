@@ -16,4 +16,6 @@ public interface CommitTask {
     CommandCommit findById(Long id);
 
     void passTheLog(Long cid);
+
+    void rejectTheCommit(Long cid);
 }

@@ -62,4 +62,11 @@ public class CommitTaskImpl implements CommitTask {
         addLog.setStatus(CommitStatus.CREATE_SUCCESS);
         service.save(addLog);
     }
+
+    @Override
+    public void rejectTheCommit(Long cid) {
+        CommandCommit commit = findById(cid);
+        commit.setStatus(CommitStatus.CREATE_REJECT);
+        service.save(commit);
+    }
 }

@@ -25,6 +25,7 @@ public class CreateCmdRequest {
         try {
             return om.readValue(params, javaType);
         } catch (IOException e) {
+            e.printStackTrace();
             return new ArrayList<>();
         }
     }
@@ -35,6 +36,7 @@ public class CreateCmdRequest {
         try {
             return om.readValue(options, javaType);
         } catch (IOException e) {
+            e.printStackTrace();
             return new ArrayList<>();
         }
     }
