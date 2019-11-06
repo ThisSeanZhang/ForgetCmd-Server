@@ -20,6 +20,7 @@ public class Snapshot {
     private ShareType share;
     private String shareCode;
     private Boolean allowCopy;
+    private Long cid;
 
     private Long did;
 

@@ -1,7 +1,28 @@
 package io.whileaway.forgetcmd.snapshot.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import io.whileaway.forgetcmd.snapshot.entities.Snapshot;
+import io.whileaway.forgetcmd.snapshot.request.CreateSnapshotRequest;
+import io.whileaway.forgetcmd.snapshot.task.SnapshotTask;
+import io.whileaway.forgetcmd.util.Result;
+import io.whileaway.forgetcmd.util.ResultUtil;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+@RestController("/snapshots")
 public class SnapshotController {
+
+    private final SnapshotTask task;
+
+    public SnapshotController(SnapshotTask task) {
+        this.task = task;
+    }
+
+    @PostMapping
+    public Result<Snapshot> createSnapshot(@RequestBody CreateSnapshotRequest request) {
+        return ResultUtil.success(task.createSnapshot(request));
+    }
+
+    @GetMapping("/{cid}")
+    public Result<Snapshot> getSnapshotBySid(@PathVariable("cid") Long cid) {
+        return ResultUtil.success(task.getSnapshotById(cid));
+    }
 }

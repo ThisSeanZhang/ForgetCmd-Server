@@ -1,5 +1,7 @@
 package io.whileaway.forgetcmd.snapshot.enums;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
 import javax.persistence.AttributeConverter;
@@ -20,6 +22,10 @@ public enum ShareType {
         this.value = value;
     }
 
+    @JsonValue
+    public Integer getValue() {
+        return value;
+    }
 
     public static class Converter implements AttributeConverter<ShareType, Integer> {
 
