@@ -15,6 +15,7 @@ public class Command {
     private String commandName;
     private String briefDesc;
     private String description;
+    // version of update
     private String version;
     private String platform;
     private Integer argNum;
@@ -25,4 +26,5 @@ public class Command {
     private CommandStatus status;
     private String whoCreated;
     private Long creatorId;
+    private Long ccid;
 }

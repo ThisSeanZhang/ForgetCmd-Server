@@ -21,7 +21,7 @@ public class Snapshot {
     private String shareCode;
     private Boolean allowCopy;
     private Long cid;
-
+    private Long ccid;
     private Long did;
 
 }
