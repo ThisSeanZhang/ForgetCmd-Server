@@ -8,9 +8,10 @@ import java.util.stream.Stream;
 
 @Getter
 public enum CommitStatus {
-    NEED_REVIEW("需要审查", 0),
-    CREATE_SUCCESS("创建成功", 1),
-    CREATE_REJECT("拒绝创建", 2),
+    NEED_REVIEW("待审查", 0),
+    REFERENCED("引用", 1),
+    UNREFERENCED("未引用", 2),
+    CREATE_REJECT("拒绝引用", 3),
     ;
     private String status;
     private Integer code;

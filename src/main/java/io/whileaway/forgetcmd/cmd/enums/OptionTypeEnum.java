@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import javax.persistence.AttributeConverter;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -40,7 +41,9 @@ public enum OptionTypeEnum {
 
         @Override
         public Integer convertToDatabaseColumn(OptionTypeEnum attribute) {
-            return attribute.getValue();
+            return Optional.ofNullable(attribute)
+                    .map(OptionTypeEnum::getValue)
+                    .orElse(NONE.value);
         }
 
         @Override
@@ -48,7 +51,7 @@ public enum OptionTypeEnum {
             return Stream.of(values())
                     .filter(e -> e.getValue().equals(dbData))
                     .findAny()
-                    .orElse(OptionTypeEnum.STRING);
+                    .orElse(NONE);
         }
     }
 

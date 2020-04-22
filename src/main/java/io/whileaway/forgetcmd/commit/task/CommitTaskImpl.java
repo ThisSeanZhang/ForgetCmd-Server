@@ -1,15 +1,17 @@
 package io.whileaway.forgetcmd.commit.task;
 
 import io.whileaway.forgetcmd.cmd.entities.Command;
+import io.whileaway.forgetcmd.cmd.request.CreateCmdRequest;
 import io.whileaway.forgetcmd.cmd.task.CmdTask;
-import io.whileaway.forgetcmd.rbac.enums.PermissionType;
-import io.whileaway.forgetcmd.rbac.enums.ResourceType;
-import io.whileaway.forgetcmd.rbac.request.CreateRelatedRequest;
+import io.whileaway.forgetcmd.commit.entities.CommitItem;
+import io.whileaway.forgetcmd.commit.request.ConfirmCommitRequest;
+import io.whileaway.forgetcmd.commit.request.ItemSearchRequest;
+import io.whileaway.forgetcmd.commit.response.CommandListResponse;
 import io.whileaway.forgetcmd.rbac.task.RelatedTask;
 import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
 import io.whileaway.forgetcmd.commit.entities.CommandCommit;
 import io.whileaway.forgetcmd.commit.enums.CommitStatus;
-import io.whileaway.forgetcmd.commit.request.AddLogSearchRequest;
+import io.whileaway.forgetcmd.commit.request.CommitSearchRequest;
 import io.whileaway.forgetcmd.commit.request.CommandCommitRequest;
 import io.whileaway.forgetcmd.commit.service.CommandCommitService;
 import org.springframework.stereotype.Component;
@@ -33,17 +35,11 @@ public class CommitTaskImpl implements CommitTask {
     @Override
     @Transactional
     public CommandCommit createCommandCommit(CommandCommitRequest request) {
-        CommandCommit save = service.save(request.convertToCommandCommit());
-//        CreateRelatedRequest relatedRequest = new CreateRelatedRequest();
-//        relatedRequest.setResourceId(save.getCcid());
-//        relatedRequest.setPermits(PermissionType.allPermission());
-//        relatedRequest.setType(ResourceType.VERIFY);
-//        relatedTask.createRelated(relatedRequest);
-        return save;
+        return service.createCommit(request);
     }
 
     @Override
-    public List<CommandCommit> searchAddLog(AddLogSearchRequest request) {
+    public List<CommandCommit> searchAddLog(CommitSearchRequest request) {
 //        return service.search(request).stream().map(CmdAddLog::convertBrief).collect(Collectors.toList());
         return service.search(request);
     }
@@ -57,9 +53,9 @@ public class CommitTaskImpl implements CommitTask {
     @Transactional
     public void passTheLog(Long cid) {
         CommandCommit addLog = findById(cid);
-        Command cmd = cmdTask.createCmd(addLog.createCommandRequest());
+        Command cmd = cmdTask.createCmd(new CreateCmdRequest());
         addLog.setCid(cmd.getCid());
-        addLog.setStatus(CommitStatus.CREATE_SUCCESS);
+        addLog.setStatus(CommitStatus.REFERENCED);
         service.save(addLog);
     }
 
@@ -69,4 +65,10 @@ public class CommitTaskImpl implements CommitTask {
         commit.setStatus(CommitStatus.CREATE_REJECT);
         service.save(commit);
     }
+
+    @Override
+    public List<CommandListResponse> commitCommandList() {
+        return service.commitCommandList();
+    }
+
 }

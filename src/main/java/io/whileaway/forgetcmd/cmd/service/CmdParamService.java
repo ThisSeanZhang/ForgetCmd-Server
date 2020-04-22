@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface CmdParamService extends BaseService<CmdParam, Long> {
 
-    Optional<List<CmdParam>> findBydCid(Long cid);
+    Optional<List<CmdParam>> findByCid(Long cid);
 
     void updateCommandParams(Long cid, List<CmdParam> params);
 }

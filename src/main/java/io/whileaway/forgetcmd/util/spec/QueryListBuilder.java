@@ -14,6 +14,12 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * 1. 更具特定条件查询list
+ * 2. 排序
+ * 3. 分页
+ * @param <A>
+ */
 public class QueryListBuilder<A> {
 
     final private List<Specification<A>> conditions = new ArrayList<>();
