@@ -15,8 +15,8 @@ public interface CommandCommitRepository extends BaseRepository<CommandCommit, L
 
     /**
      * 获取待确认的组
-     * @param status
-     * @return
+     * @param status 状态
+     * @return 符合条件的列表
      */
     // TODO 如果当前有同命令不同版本的，那么都会展示  但是实际上是需要去掉过时的
     @Query(value = "SELECT " +
@@ -32,9 +32,11 @@ public interface CommandCommitRepository extends BaseRepository<CommandCommit, L
 
     List<CommandCommit> findByCidAndStatus(Long cid, CommitStatus status);
 
-
     List<CommandCommit> findByCommandNameAndVersion(String commandName, Long version);
 
     @Query(value = "select m from CommandCommit m where commandName = :commandName and version = 0")
     List<CommandCommit> initialCommitByName(@Param("commandName") String commandName);
+
+    @Query(value = "select m from CommandCommit m where commandName = :commandName and version > :version")
+    List<CommandCommit> updatedVersionCommit(@Param("commandName") String commandName, @Param("version")Long version);
 }

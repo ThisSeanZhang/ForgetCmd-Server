@@ -28,10 +28,23 @@ public class StringUtils {
 
     }
 
+    public static String removeExtraSeparator(String str, String sep) {
+        if (isEmptyOrBlank(str)) return str;
+        return Stream.of(str.split(sep))
+                .filter(StringUtils::nonEmptyOrBlank)
+                .collect(Collectors.joining(sep));
+    }
+
+
     public static void main(String[] args) {
-        List<Long> longs = StringUtils.decodeIDs("1,2,3,4,5");
-        System.out.println(longs);
-        List<Long> longs2 = StringUtils.decodeIDs("NDM1OTgsNDU2NzgsNDUsNDUsNTYsNQ==");
-        System.out.println(longs2);
+//        List<Long> longs = StringUtils.decodeIDs("1,2,3,4,5");
+//        System.out.println(longs);
+//        List<Long> longs2 = StringUtils.decodeIDs("NDM1OTgsNDU2NzgsNDUsNDUsNTYsNQ==");
+//        System.out.println(longs2);
+
+        String s = StringUtils.removeExtraSeparator("aaa----a-a-a-aa", "-");
+        System.out.println(s);
+        s = StringUtils.removeExtraSeparator("   podman aaaa  ", " ");
+        System.out.println(s);
     }
 }

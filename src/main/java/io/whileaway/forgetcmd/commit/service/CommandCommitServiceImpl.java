@@ -12,6 +12,7 @@ import io.whileaway.forgetcmd.commit.entities.CommandCommit;
 import io.whileaway.forgetcmd.commit.repository.CommandCommitRepository;
 import io.whileaway.forgetcmd.commit.request.CommitSearchRequest;
 import io.whileaway.forgetcmd.util.ListUtils;
+import io.whileaway.forgetcmd.util.StringUtils;
 import io.whileaway.forgetcmd.util.auto.AutoFill;
 import io.whileaway.forgetcmd.util.spec.QueryListBuilder;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,13 @@ public class CommandCommitServiceImpl implements CommandCommitService {
 
     @Override
     public CommandCommit createCommit(CommandCommitRequest request) {
+        if (StringUtils.isEmptyOrBlank(request.getCommandName())) CommitError.COMMAND_NAME_NOT_EMPTY.throwThis();
+        List<CommandCommit> updatedVersionCommit = repository.updatedVersionCommit(request.getCommandName(), request.getVersion());
+        if(ListUtils.notEmptyList(updatedVersionCommit))
+            if (0 == request.getVersion())
+                CommitError.COMMAND_EXIST.throwThis();
+            else
+                CommitError.OLDER_VERSION_COMMAND_NOT_ALLOW_COMMIT.throwThis();
         CommandCommit commit = repository.save(request.convertToCommandCommit());
         itemRepository.saveAll(request.itemStream()
                 .peek(item -> item.setCcid(commit.getCcid()))

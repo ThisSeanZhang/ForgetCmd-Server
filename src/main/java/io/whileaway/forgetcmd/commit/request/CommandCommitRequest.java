@@ -3,6 +3,7 @@ package io.whileaway.forgetcmd.commit.request;
 import io.whileaway.forgetcmd.commit.entities.CommandCommit;
 import io.whileaway.forgetcmd.commit.entities.CommitItem;
 import io.whileaway.forgetcmd.commit.enums.CommitStatus;
+import io.whileaway.forgetcmd.util.StringUtils;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -61,5 +62,9 @@ public class CommandCommitRequest {
 
     public Stream<CommitItem> itemStream() {
         return Objects.isNull(items) ? Stream.empty() : items.stream().filter(Objects::nonNull);
+    }
+
+    public String getCommandName() {
+        return StringUtils.removeExtraSeparator(commandName, " ");
     }
 }
