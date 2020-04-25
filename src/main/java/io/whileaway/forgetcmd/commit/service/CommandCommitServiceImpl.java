@@ -83,8 +83,8 @@ public class CommandCommitServiceImpl implements CommandCommitService {
     @Transactional
     public void confirmCommit(ConfirmCommitRequest request) {
         List<CommandCommit> needConfirmCommit =  request.isInitialCommit()
-                ? repository.initialCommitByName(request.getCommandName())
-                : repository.findByCommandNameAndVersion(request.getCommandName(), request.getVersion());
+                ? repository.initialCommitByNameAndStatus(request.getCommandName(), CommitStatus.NEED_REVIEW)
+                : repository.findByCommandNameAndVersionAndStatus(request.getCommandName(), request.getVersion(), CommitStatus.NEED_REVIEW);
         if (ListUtils.isEmptyList(needConfirmCommit))
             CommitError.NO_MATCH_COMMITS.throwThis();
         List<CommandCommit> updatedCommit = needConfirmCommit.stream()

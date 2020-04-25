@@ -37,7 +37,7 @@ public class CommandCommitRequest {
 //        ObjectMapper mapper = new ObjectMapper();
         CommandCommit commit = new CommandCommit();
         commit.setCid(cid);
-        commit.setCommandName(commandName);
+        commit.setCommandName(getCommandName());
         commit.setBriefDesc(briefDesc);
         commit.setDescription(description);
         commit.setVersion(Objects.isNull(version) ? 0L : version);

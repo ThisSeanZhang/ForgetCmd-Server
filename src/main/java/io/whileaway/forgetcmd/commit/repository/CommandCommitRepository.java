@@ -32,11 +32,12 @@ public interface CommandCommitRepository extends BaseRepository<CommandCommit, L
 
     List<CommandCommit> findByCidAndStatus(Long cid, CommitStatus status);
 
-    List<CommandCommit> findByCommandNameAndVersion(String commandName, Long version);
+    List<CommandCommit> findByCommandNameAndVersionAndStatus(String commandName, Long version, CommitStatus status);
 
-    @Query(value = "select m from CommandCommit m where commandName = :commandName and version = 0")
-    List<CommandCommit> initialCommitByName(@Param("commandName") String commandName);
+    @Query(value = "select m from CommandCommit m where commandName = :commandName and version = 0 and status = :#{#status.code} ")
+    List<CommandCommit> initialCommitByNameAndStatus(@Param("commandName") String commandName,@Param("status") CommitStatus needReview);
 
     @Query(value = "select m from CommandCommit m where commandName = :commandName and version > :version")
     List<CommandCommit> updatedVersionCommit(@Param("commandName") String commandName, @Param("version")Long version);
+
 }

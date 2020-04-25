@@ -2,6 +2,7 @@ package io.whileaway.forgetcmd.cmd.entities;
 
 import io.whileaway.forgetcmd.cmd.enums.CmdError;
 import io.whileaway.forgetcmd.cmd.enums.CommandStatus;
+import io.whileaway.forgetcmd.util.StringUtils;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -32,13 +33,6 @@ public class Command {
     private Long chid;
 
 
-    public void updateSomeThingFromOther(Command cmd) {
-        this.commandName = cmd.commandName;
-        this.briefDesc = cmd.briefDesc;
-        this.description = cmd.description;
-        this.version = cmd.getVersion() + 1;
-    }
-
     public void remainFromDataBase(Command dataBaseCmd) {
         if(this.version + 1 <= dataBaseCmd.version) {
             CmdError.SUBMITTED_VERSION_IS_OUT_OF_DATE.throwThis();
@@ -48,11 +42,16 @@ public class Command {
         this.version = dataBaseCmd.version + 1;
         this.status = dataBaseCmd.status;
         this.whoCreated = this.whoCreated + " , " + dataBaseCmd.whoCreated;
+        this.commandName = dataBaseCmd.getCommandName();
         // TODO 填充剩下需要保持 CommandCommit ID
     }
 
     public void init() {
         this.setStatus(CommandStatus.NORMAL);
         this.version = 1L;
+    }
+
+    public String getCommandName() {
+        return StringUtils.removeExtraSeparator(commandName, " ");
     }
 }
