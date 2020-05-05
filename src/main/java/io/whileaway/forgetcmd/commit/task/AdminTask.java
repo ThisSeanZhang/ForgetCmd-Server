@@ -8,4 +8,6 @@ import java.util.List;
 public interface AdminTask {
 
     List<Command> searchCommand(SearchCmdRequest request);
+
+    Command pauseCommand(Long cid);
 }

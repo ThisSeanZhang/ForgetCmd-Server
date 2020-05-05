@@ -1,5 +1,6 @@
 package io.whileaway.forgetcmd.snapshot.controller;
 
+import io.whileaway.forgetcmd.rbac.annotation.AdminPermit;
 import io.whileaway.forgetcmd.snapshot.entities.Snapshot;
 import io.whileaway.forgetcmd.snapshot.request.CreateSnapshotRequest;
 import io.whileaway.forgetcmd.snapshot.task.SnapshotTask;
@@ -17,11 +18,13 @@ public class SnapshotController {
     }
 
     @PostMapping
+    @AdminPermit
     public Result<Snapshot> createSnapshot(@RequestBody CreateSnapshotRequest request) {
         return ResultUtil.success(task.createSnapshot(request));
     }
 
     @GetMapping("/{cid}")
+    @AdminPermit
     public Result<Snapshot> getSnapshotBySid(@PathVariable("cid") Long cid) {
         return ResultUtil.success(task.getSnapshotById(cid));
     }

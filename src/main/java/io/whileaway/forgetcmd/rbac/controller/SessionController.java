@@ -4,9 +4,7 @@ import io.whileaway.forgetcmd.rbac.entites.Developer;
 import io.whileaway.forgetcmd.rbac.request.CreateSession;
 import io.whileaway.forgetcmd.rbac.task.RBACTask;
 import io.whileaway.forgetcmd.util.Result;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.whileaway.forgetcmd.util.ResultUtil;
 
@@ -22,7 +20,13 @@ public class SessionController {
 
 
     @PostMapping
-    public Result<Developer> createSession(CreateSession createSession) {
+    public Result<Developer> createSession(@RequestBody CreateSession createSession) {
         return ResultUtil.success(rbacTask.createSession(createSession));
+    }
+
+    @DeleteMapping("/{did}")
+    public Result deleteSession(@PathVariable("did") Long did) {
+        rbacTask.deleteSession(did);
+        return ResultUtil.success();
     }
 }

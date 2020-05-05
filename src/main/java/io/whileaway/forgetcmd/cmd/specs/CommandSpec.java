@@ -29,7 +29,7 @@ public class CommandSpec {
     }
 
     public static Specification<Command> normal() {
-        return Spec.equal(Command_.status, () -> CommandStatus.NORMAL);
+        return Spec.equal(Command_.status, () -> CommandStatus.NORMAL).or(Spec.equal(Command_.status, () -> CommandStatus.PAUSE));
     }
 
     public static Specification<Command> likeEmail(Supplier<String> supplier) {

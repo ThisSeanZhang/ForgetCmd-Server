@@ -11,4 +11,6 @@ public interface RBACTask {
     Developer createAccount(CreateAccount createAccount);
 
     boolean existNameOrEmail(String key);
+
+    void deleteSession(Long did);
 }

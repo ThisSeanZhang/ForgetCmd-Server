@@ -1,6 +1,7 @@
 package io.whileaway.forgetcmd.rbac.request;
 
 import io.whileaway.forgetcmd.rbac.entites.Developer;
+import io.whileaway.forgetcmd.rbac.enums.DeveloperStatus;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -29,6 +30,7 @@ public class CreateAccount {
         developer.setNickname( nickName );
         developer.setEmail(email);
         developer.setPass(pass);
+        developer.setStatus(DeveloperStatus.NORMAL);
         return developer;
     }
 }

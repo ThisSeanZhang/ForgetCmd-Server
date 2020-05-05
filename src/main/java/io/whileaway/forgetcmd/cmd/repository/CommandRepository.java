@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface CommandRepository extends BaseRepository<Command, Long> {
 
     Optional<Command> findByCidOrCommandName(Long cid, String commandName);
+
 }

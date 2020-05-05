@@ -3,11 +3,10 @@ package io.whileaway.forgetcmd.cmd.controller;
 import io.whileaway.forgetcmd.cmd.entities.Command;
 import io.whileaway.forgetcmd.cmd.request.SearchCmdRequest;
 import io.whileaway.forgetcmd.commit.task.AdminTask;
+import io.whileaway.forgetcmd.rbac.annotation.AdminPermit;
 import io.whileaway.forgetcmd.util.Result;
 import io.whileaway.forgetcmd.util.ResultUtil;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +21,15 @@ public class AdminController {
     }
 
     @GetMapping
+    @AdminPermit
     public Result<List<Command>> searchCommand(SearchCmdRequest request) {
         return ResultUtil.success(adminTask.searchCommand(request));
     }
+
+    @PutMapping("{cid}/status/pause")
+    @AdminPermit
+    public Result<Command> pauseCommand(@PathVariable("cid") Long cid) {
+        return ResultUtil.success(adminTask.pauseCommand(cid));
+    }
+
 }

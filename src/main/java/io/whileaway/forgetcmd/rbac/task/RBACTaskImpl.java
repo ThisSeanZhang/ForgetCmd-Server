@@ -51,4 +51,11 @@ public class RBACTaskImpl implements RBACTask {
         List<Developer> developers = developerService.matchTheWholeNameOrEmail(key);
         return developers.size() > 0;
     }
+
+    @Override
+    public void deleteSession(Long did) {
+        System.out.println("ID为" + did + "的开发者退出了");
+        session.removeAttribute(RBACConstant.CURRENT_DEVELOPER);
+        session.invalidate();
+    }
 }

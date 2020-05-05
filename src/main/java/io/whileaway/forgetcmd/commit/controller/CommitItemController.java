@@ -4,6 +4,7 @@ import io.whileaway.forgetcmd.commit.entities.CommitItem;
 import io.whileaway.forgetcmd.commit.request.ItemSearchRequest;
 import io.whileaway.forgetcmd.commit.task.CommitItemTask;
 import io.whileaway.forgetcmd.commit.task.CommitTask;
+import io.whileaway.forgetcmd.rbac.annotation.AdminPermit;
 import io.whileaway.forgetcmd.util.Result;
 import io.whileaway.forgetcmd.util.ResultUtil;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,11 +30,13 @@ public class CommitItemController {
 //    }
 
     @GetMapping("cmds/{cid}/version/{version}")
+    @AdminPermit
     public Result commandCommitItem(@PathVariable(name = "cid")Long cid, @PathVariable(name = "version") String version) {
         return ResultUtil.success();
     }
 
     @GetMapping
+    @AdminPermit
     public Result<List<CommitItem>> searchCommitItems(ItemSearchRequest request) {
         return ResultUtil.success(task.searchItems(request));
     }

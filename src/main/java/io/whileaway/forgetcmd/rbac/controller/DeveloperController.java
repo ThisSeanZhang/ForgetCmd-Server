@@ -3,7 +3,6 @@ package io.whileaway.forgetcmd.rbac.controller;
 import io.whileaway.forgetcmd.rbac.entites.Developer;
 import io.whileaway.forgetcmd.rbac.request.CreateAccount;
 import io.whileaway.forgetcmd.rbac.task.RBACTask;
-import io.whileaway.forgetcmd.util.ParamInspect;
 import io.whileaway.forgetcmd.util.Result;
 import io.whileaway.forgetcmd.util.ResultUtil;
 import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
@@ -21,9 +20,9 @@ public class DeveloperController {
 
     @GetMapping("/developer-name/{key}")
     public Result matchTheWholeNameOrEmail(@PathVariable("key") String key) {
-        return rbacTask.existNameOrEmail(key)
-                ? ResultUtil.success()
-                : ResultUtil.error(CommonErrorEnum.NOT_FOUND.getException());
+        boolean b = rbacTask.existNameOrEmail(key);
+        if (!b) CommonErrorEnum.NOT_FOUND.throwThis();
+        return ResultUtil.success();
     }
 
     @PostMapping

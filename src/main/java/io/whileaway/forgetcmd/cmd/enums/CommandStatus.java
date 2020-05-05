@@ -11,6 +11,7 @@ public enum CommandStatus {
 
     FORBIDDEN(1, "禁用"),
     NORMAL(2, "正常"),
+    PAUSE(3, "暂停使用"),
     ;
 
     private Integer code;

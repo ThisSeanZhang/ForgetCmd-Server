@@ -2,6 +2,7 @@ package io.whileaway.forgetcmd.commit.task;
 
 import io.whileaway.forgetcmd.cmd.entities.Command;
 import io.whileaway.forgetcmd.cmd.request.SearchCmdRequest;
+import io.whileaway.forgetcmd.cmd.response.SearchCmdResponse;
 import io.whileaway.forgetcmd.commit.service.AdminService;
 import org.springframework.stereotype.Component;
 
@@ -19,5 +20,10 @@ public class AdminTaskImpl implements AdminTask {
     @Override
     public List<Command> searchCommand(SearchCmdRequest request) {
         return service.search(request);
+    }
+
+    @Override
+    public Command pauseCommand(Long cid) {
+        return service.pauseCommand(cid);
     }
 }

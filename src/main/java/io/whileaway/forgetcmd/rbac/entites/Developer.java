@@ -26,4 +26,5 @@ public class Developer {
     @JsonIgnore
     private String salt;
 
+    private boolean admin;
 }
