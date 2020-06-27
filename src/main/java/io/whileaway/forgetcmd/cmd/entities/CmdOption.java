@@ -24,6 +24,7 @@ public class CmdOption {
     private Long whenDeprecated;
     private Long whenEnable;
     private Long frequency;
+    private boolean duplicate;
 
     public void update (CmdOption inOption) {
         this.briefName = inOption.briefName;
