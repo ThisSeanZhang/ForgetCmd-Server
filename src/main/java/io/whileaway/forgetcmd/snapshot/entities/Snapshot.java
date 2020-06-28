@@ -1,5 +1,6 @@
 package io.whileaway.forgetcmd.snapshot.entities;
 
+import io.whileaway.forgetcmd.util.StringUtils;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -27,4 +28,12 @@ public class Snapshot {
     private Long did;
     private String location;
 
+
+    public boolean canShare(String shareCode) {
+        return share && (StringUtils.isEmptyOrBlank(this.shareCode) || this.shareCode.equals(shareCode));
+    }
+
+    public boolean canShare() {
+        return canShare("");
+    }
 }

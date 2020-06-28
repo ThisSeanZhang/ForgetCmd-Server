@@ -3,6 +3,7 @@ package io.whileaway.forgetcmd.snapshot.controller;
 import io.whileaway.forgetcmd.rbac.annotation.AdminPermit;
 import io.whileaway.forgetcmd.snapshot.entities.Snapshot;
 import io.whileaway.forgetcmd.snapshot.request.CreateSnapshotRequest;
+import io.whileaway.forgetcmd.snapshot.request.GetSnapshotRequest;
 import io.whileaway.forgetcmd.snapshot.request.SearchSnapshotRequest;
 import io.whileaway.forgetcmd.snapshot.task.SnapshotTask;
 import io.whileaway.forgetcmd.util.Result;
@@ -18,15 +19,16 @@ import java.util.List;
 public class SnapshotController {
 
     private final SnapshotTask task;
+
     @PostMapping
     public Result<Snapshot> createSnapshot(@RequestBody CreateSnapshotRequest request) {
         return ResultUtil.success(task.createSnapshot(request));
     }
 
-    @AdminPermit
-    @GetMapping("/{cid}")
-    public Result<Snapshot> getSnapshotBySid(@PathVariable("cid") Long cid) {
-        return ResultUtil.success(task.getSnapshotById(cid));
+    @GetMapping("/{snapId}")
+    public Result<Snapshot> getSnapshotBySid(@PathVariable("snapId") Long snapId, @RequestParam GetSnapshotRequest request) {
+        request.setSnapId(snapId);
+        return ResultUtil.success(task.getSnapshot(request));
     }
 
     @GetMapping("/search")

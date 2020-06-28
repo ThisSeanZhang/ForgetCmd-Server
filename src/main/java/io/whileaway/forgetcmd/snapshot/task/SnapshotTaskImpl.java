@@ -3,12 +3,14 @@ package io.whileaway.forgetcmd.snapshot.task;
 import io.whileaway.forgetcmd.rbac.CurrentDeveloperInfo;
 import io.whileaway.forgetcmd.snapshot.entities.Snapshot;
 import io.whileaway.forgetcmd.snapshot.request.CreateSnapshotRequest;
+import io.whileaway.forgetcmd.snapshot.request.GetSnapshotRequest;
 import io.whileaway.forgetcmd.snapshot.request.SearchSnapshotRequest;
 import io.whileaway.forgetcmd.snapshot.service.SnapshotService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
 @Component
 @AllArgsConstructor
@@ -19,8 +21,9 @@ public class SnapshotTaskImpl implements SnapshotTask {
 
     @Override
     public Snapshot createSnapshot(CreateSnapshotRequest request) {
+        Long did = currentDeveloper.getDidOrElseThrow();
         Snapshot snapshot = request.convertToSnapshot();
-        snapshot.setDid(currentDeveloper.getDid());
+        snapshot.setDid(did);
         // TODO 统一存放关键字
         snapshot.setLocation("online-remote");
         return service.save(snapshot);
@@ -45,5 +48,10 @@ public class SnapshotTaskImpl implements SnapshotTask {
     @Override
     public List<Snapshot> searchSnapshot(SearchSnapshotRequest request) {
         return service.searchSnapshot(request);
+    }
+
+    @Override
+    public Snapshot getSnapshot(GetSnapshotRequest request) {
+        return service.getSnapshot(request);
     }
 }
