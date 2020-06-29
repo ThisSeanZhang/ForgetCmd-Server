@@ -26,7 +26,6 @@ public class ValidUtil {
     }
 
     public Developer getCurrentDeveloper () {
-//        RBACConstant.CURRENT_DEVELOPER
         Object currentDeveloper = session.getAttribute(RBACConstant.CURRENT_DEVELOPER);
         if (Objects.nonNull(currentDeveloper) && currentDeveloper instanceof Developer) {
             return (Developer) currentDeveloper;

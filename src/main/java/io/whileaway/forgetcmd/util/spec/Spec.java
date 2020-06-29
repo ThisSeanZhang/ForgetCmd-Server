@@ -1,6 +1,5 @@
 package io.whileaway.forgetcmd.util.spec;
 
-import io.whileaway.forgetcmd.snapshot.entities.Snapshot;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.metamodel.SingularAttribute;

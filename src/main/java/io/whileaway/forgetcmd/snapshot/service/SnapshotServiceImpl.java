@@ -1,8 +1,10 @@
 package io.whileaway.forgetcmd.snapshot.service;
 
+import io.whileaway.forgetcmd.rbac.CurrentDeveloperInfo;
 import io.whileaway.forgetcmd.snapshot.entities.Snapshot;
-import io.whileaway.forgetcmd.snapshot.entities.SnapshotError;
+import io.whileaway.forgetcmd.snapshot.enums.SnapshotError;
 import io.whileaway.forgetcmd.snapshot.repository.SnapshotRepository;
+import io.whileaway.forgetcmd.snapshot.request.CreateSnapshotRequest;
 import io.whileaway.forgetcmd.snapshot.request.GetSnapshotRequest;
 import io.whileaway.forgetcmd.snapshot.request.SearchSnapshotRequest;
 import io.whileaway.forgetcmd.snapshot.specs.SnapshotSpec;
@@ -21,7 +23,7 @@ import java.util.Optional;
 public class SnapshotServiceImpl implements SnapshotService {
 
     private final SnapshotRepository repository;
-    private final ValidUtil validUtil;
+    private final CurrentDeveloperInfo developer;
 
     private final SnapshotSpec snapshotSpec;
 
@@ -55,9 +57,18 @@ public class SnapshotServiceImpl implements SnapshotService {
         Snapshot snapshot = snapshotOptional.orElseThrow(SnapshotError.NOT_FOUND::getException);
         if (snapshot.canShare(request.getShareCode()))
             return snapshot;
-        else if (Objects.equals(validUtil.getCurrentDeveloper().getDid(), snapshot.getDid()))
+        else if (Objects.equals(developer.getDid(), snapshot.getDid()))
             return snapshot;
         else
             throw SnapshotError.FORBIDDEN.getException();
+    }
+
+    @Override
+    public Snapshot upgrade(CreateSnapshotRequest request) {
+        Optional<Snapshot> snapshotOptional = repository.findBySnapIdAndDid(request.getSnapId(), developer.getDid());
+        if (snapshotOptional.isEmpty()) SnapshotError.NOT_FOUND.throwThis();
+        Snapshot snapshot = snapshotOptional.get();
+        snapshot.updateFrom(request.convertToSnapshot());
+        return repository.save(snapshot);
     }
 }

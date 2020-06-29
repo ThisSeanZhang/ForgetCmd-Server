@@ -36,4 +36,10 @@ public class Snapshot {
     public boolean canShare() {
         return canShare("");
     }
+
+    public void updateFrom(Snapshot snapshot) {
+        this.title = snapshot.title;
+        this.share = snapshot.share;
+        this.shareCode = snapshot.shareCode;
+    }
 }

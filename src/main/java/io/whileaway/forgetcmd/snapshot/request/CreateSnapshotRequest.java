@@ -9,6 +9,7 @@ import java.time.Instant;
 @Data
 public class CreateSnapshotRequest {
 
+    private Long snapId;
     private String paramVal;
     private String optionVal;
     private String title;

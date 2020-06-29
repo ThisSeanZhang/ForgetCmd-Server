@@ -26,7 +26,7 @@ public class SnapshotController {
     }
 
     @GetMapping("/{snapId}")
-    public Result<Snapshot> getSnapshotBySid(@PathVariable("snapId") Long snapId, @RequestParam GetSnapshotRequest request) {
+    public Result<Snapshot> getSnapshotBySid(@PathVariable("snapId") Long snapId,GetSnapshotRequest request) {
         request.setSnapId(snapId);
         return ResultUtil.success(task.getSnapshot(request));
     }
@@ -34,5 +34,11 @@ public class SnapshotController {
     @GetMapping("/search")
     public Result<List<Snapshot>> searchSnapshot(SearchSnapshotRequest request) {
         return ResultUtil.success(task.searchSnapshot(request));
+    }
+
+    @PutMapping("/{snapId}")
+    public Result<Snapshot> searchSnapshot(@PathVariable("snapId") Long snapId, @RequestBody CreateSnapshotRequest request) {
+        request.setSnapId(snapId);
+        return ResultUtil.success(task.upgradeSnap(request));
     }
 }

@@ -20,4 +20,6 @@ public interface SnapshotTask {
     List<Snapshot> searchSnapshot(SearchSnapshotRequest request);
 
     Snapshot getSnapshot(GetSnapshotRequest request);
+
+    Snapshot upgradeSnap(CreateSnapshotRequest request);
 }
