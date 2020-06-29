@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface OptionService extends BaseService<CmdOption, Long> {
 
     Optional<List<CmdOption>> findByCid(Long cid);
+
+    void updateCommandOptions(Long cid, List<CmdOption> options);
 }

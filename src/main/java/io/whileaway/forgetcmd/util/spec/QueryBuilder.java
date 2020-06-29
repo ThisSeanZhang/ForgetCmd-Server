@@ -4,7 +4,10 @@ import io.whileaway.forgetcmd.cmd.entities.Command;
 import io.whileaway.forgetcmd.cmd.entities.Command_;
 import org.springframework.data.jpa.domain.Specification;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Path;
 import javax.persistence.metamodel.SingularAttribute;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -62,10 +65,26 @@ public class QueryBuilder<A, B> {
         return perCondition == null ? condition : perCondition;
     }
 
+    public static<T, B> Specification<B> in(SingularAttribute<B, T> attribute, Predicate<List<T>> predicate, Supplier<List<T>> supplier) {
+        return predicate.test(supplier.get())
+                ? null
+                : (root, query, builder) -> {
+            Path<T> path = root.get(attribute);
+            CriteriaBuilder.In<Object> in = builder.in(path);
+            supplier.get().forEach(in::value);
+            return builder.and(in);
+        };
+    }
+
     public static<T, B> Specification<B> equal(String paramName, Predicate<T> predicate, Supplier<T> supplier) {
         return predicate.test(supplier.get())
                 ? null
                 : (root, query, builder) -> builder.equal(root.get(paramName), supplier.get());
+    }
+    public static<T, B> Specification<B> equal(SingularAttribute<B, T> attribute, Predicate<T> predicate, Supplier<T> supplier) {
+        return predicate.test(supplier.get())
+                ? null
+                : (root, query, builder) -> builder.equal(root.get(attribute), supplier.get());
     }
 
     public static<T> Specification<Command> equalA(String paramName, Predicate<T> predicate, Supplier<T> supplier) {

@@ -29,4 +29,21 @@ public class CommonException extends RuntimeException{
         }
     }
 
+    public static class ServerErrorException extends CommonException{
+        public ServerErrorException(String message) {
+            super(500, message);
+        }
+    }
+
+    public static class ForbiddenException extends CommonException{
+        public ForbiddenException(String message) {
+            super(403, message);
+        }
+    }
+
+    public static class UnauthorizedException extends CommonException {
+        public UnauthorizedException(String message) {
+            super(401, message);
+        }
+    }
 }
