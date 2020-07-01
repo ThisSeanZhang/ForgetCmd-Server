@@ -15,4 +15,8 @@ public interface CommonError {
     }
 
     CommonException getException();
+
+    default String getMark() {
+        return "";
+    }
 }

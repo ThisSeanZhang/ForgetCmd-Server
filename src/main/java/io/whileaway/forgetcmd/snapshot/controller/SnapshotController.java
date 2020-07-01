@@ -41,4 +41,9 @@ public class SnapshotController {
         request.setSnapId(snapId);
         return ResultUtil.success(task.upgradeSnap(request));
     }
+
+    @GetMapping("/{snapId}/shareCode")
+    public Result<String> getSnapshotBySid(@PathVariable("snapId") Long snapId) {
+        return ResultUtil.success(task.getSnapshotById(snapId).getShareCode());
+    }
 }

@@ -9,6 +9,7 @@ import io.whileaway.forgetcmd.snapshot.request.GetSnapshotRequest;
 import io.whileaway.forgetcmd.snapshot.request.SearchSnapshotRequest;
 import io.whileaway.forgetcmd.snapshot.specs.SnapshotSpec;
 import io.whileaway.forgetcmd.util.BaseRepository;
+import io.whileaway.forgetcmd.util.StringUtils;
 import io.whileaway.forgetcmd.util.ValidUtil;
 import io.whileaway.forgetcmd.util.spec.QueryListBuilder;
 import lombok.AllArgsConstructor;
@@ -55,12 +56,23 @@ public class SnapshotServiceImpl implements SnapshotService {
     public Snapshot getSnapshot(GetSnapshotRequest request) {
         Optional<Snapshot> snapshotOptional = repository.findById(request.getSnapId());
         Snapshot snapshot = snapshotOptional.orElseThrow(SnapshotError.NOT_FOUND::getException);
-        if (snapshot.canShare(request.getShareCode()))
+        // 如果是拥有者  就直接返回
+        if (Objects.equals(developer.getDid(), snapshot.getDid()))
             return snapshot;
-        else if (Objects.equals(developer.getDid(), snapshot.getDid()))
+        // 非分享 不存在
+        if(!snapshot.isShare()) throw SnapshotError.NOT_FOUND.getException();
+        // 分享 检验code是否匹配  不匹配禁止
+        if (StringUtils.isEmptyOrBlank(snapshot::getShareCode))
             return snapshot;
-        else
-            throw SnapshotError.FORBIDDEN.getException();
+        if (StringUtils.isEmptyOrBlank(request::getShareCode))
+            throw SnapshotError.UNAUTHORIZED.getException();
+
+        if (!StringUtils.eq(snapshot::getShareCode,request::getShareCode))
+            throw SnapshotError.SHARE_CODE_NOT_MATCH.getException();
+//            throw SnapshotError.FORBIDDEN.getException();
+//        else
+//            throw SnapshotError.FORBIDDEN.getException();
+        return snapshot;
     }
 
     @Override

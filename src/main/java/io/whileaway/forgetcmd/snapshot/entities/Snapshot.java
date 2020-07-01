@@ -1,5 +1,6 @@
 package io.whileaway.forgetcmd.snapshot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.whileaway.forgetcmd.util.StringUtils;
 import lombok.Data;
 
@@ -20,6 +21,7 @@ public class Snapshot {
     private Long createTime;
 //    @Convert(converter = ShareType.Converter.class)
     private boolean share;
+    @JsonIgnore
     private String shareCode;
     private boolean allowCopy;
     private String commandName;
@@ -27,15 +29,6 @@ public class Snapshot {
     private Long ccid;
     private Long did;
     private String location;
-
-
-    public boolean canShare(String shareCode) {
-        return share && (StringUtils.isEmptyOrBlank(this.shareCode) || this.shareCode.equals(shareCode));
-    }
-
-    public boolean canShare() {
-        return canShare("");
-    }
 
     public void updateFrom(Snapshot snapshot) {
         this.title = snapshot.title;
