@@ -40,4 +40,5 @@ public interface CommandCommitRepository extends BaseRepository<CommandCommit, L
     @Query(value = "select m from CommandCommit m where commandName = :commandName and version > :version")
     List<CommandCommit> updatedVersionCommit(@Param("commandName") String commandName, @Param("version")Long version);
 
+    List<CommandCommit> findByDid(Long did);
 }

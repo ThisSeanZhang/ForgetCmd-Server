@@ -10,7 +10,7 @@ import io.whileaway.forgetcmd.snapshot.request.SearchSnapshotRequest;
 import io.whileaway.forgetcmd.snapshot.specs.SnapshotSpec;
 import io.whileaway.forgetcmd.util.BaseRepository;
 import io.whileaway.forgetcmd.util.StringUtils;
-import io.whileaway.forgetcmd.util.ValidUtil;
+import io.whileaway.forgetcmd.util.enums.CommonErrorEnum;
 import io.whileaway.forgetcmd.util.spec.QueryListBuilder;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -82,5 +82,13 @@ public class SnapshotServiceImpl implements SnapshotService {
         Snapshot snapshot = snapshotOptional.get();
         snapshot.updateFrom(request.convertToSnapshot());
         return repository.save(snapshot);
+    }
+
+    @Override
+    public List<Snapshot> getDeveloperAllSnap(Long did) {
+        if (Objects.isNull(did)) CommonErrorEnum.PARAM_ERROR.throwThis();
+        return Objects.equals(developer.getDid(), did) ?
+                repository.findByDid(did)
+                : repository.findByDidAndShareIsTrueAndShareCodeIsNull(did);
     }
 }

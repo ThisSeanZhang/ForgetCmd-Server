@@ -22,4 +22,6 @@ public interface CommandCommitService extends BaseService<CommandCommit, Long> {
     List<CommandCommit> findByIds(List<Long> ccids);
 
     List<CommandCommit> findAllCurrentByCid(Long cid);
+
+    List<CommandCommit> getUserAllCommits(Long did);
 }

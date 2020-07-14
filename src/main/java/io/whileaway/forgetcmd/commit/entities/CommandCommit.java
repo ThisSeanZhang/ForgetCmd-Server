@@ -28,6 +28,8 @@ public class CommandCommit {
     private Integer argNum;
     private String whenDeprecated;
     private String whenEnable;
+    // Developer ID
+    private Long did;
 
     @Column(columnDefinition="text")
     private String options;

@@ -20,4 +20,5 @@ public interface SnapshotService extends BaseService<Snapshot, Long> {
 
     Snapshot upgrade(CreateSnapshotRequest request);
 
+    List<Snapshot> getDeveloperAllSnap(Long did);
 }

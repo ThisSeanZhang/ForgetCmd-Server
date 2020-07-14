@@ -59,4 +59,9 @@ public class SnapshotTaskImpl implements SnapshotTask {
     public Snapshot upgradeSnap(CreateSnapshotRequest request) {
         return service.upgrade(request);
     }
+
+    @Override
+    public List<Snapshot> getDeveloperAllSnap(Long did) {
+        return service.getDeveloperAllSnap(did);
+    }
 }

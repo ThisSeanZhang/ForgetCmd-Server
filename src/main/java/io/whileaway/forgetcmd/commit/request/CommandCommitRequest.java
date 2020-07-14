@@ -32,6 +32,7 @@ public class CommandCommitRequest {
     private String options;
     private String params;
     private List<CommitItem> items;
+    private Long did;
 
     public CommandCommit convertToCommandCommit() {
 //        ObjectMapper mapper = new ObjectMapper();
@@ -50,6 +51,7 @@ public class CommandCommitRequest {
 
         commit.setOptions(options);
         commit.setParams(params);
+        commit.setDid(did);
 //        try {
 //            commit.setCmdOptions(mapper.writeValueAsString(options));
 //            commit.setCmdParams(mapper.writeValueAsString(params));

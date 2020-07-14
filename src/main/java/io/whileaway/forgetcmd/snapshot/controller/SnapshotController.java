@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static io.whileaway.forgetcmd.util.ResultUtil.success;
+
 @RestController()
 @RequestMapping("/snapshots")
 @AllArgsConstructor
@@ -22,28 +24,35 @@ public class SnapshotController {
 
     @PostMapping
     public Result<Snapshot> createSnapshot(@RequestBody CreateSnapshotRequest request) {
-        return ResultUtil.success(task.createSnapshot(request));
+        return success(task.createSnapshot(request));
     }
 
     @GetMapping("/{snapId}")
     public Result<Snapshot> getSnapshotBySid(@PathVariable("snapId") Long snapId,GetSnapshotRequest request) {
         request.setSnapId(snapId);
-        return ResultUtil.success(task.getSnapshot(request));
+        return success(task.getSnapshot(request));
     }
 
     @GetMapping("/search")
     public Result<List<Snapshot>> searchSnapshot(SearchSnapshotRequest request) {
-        return ResultUtil.success(task.searchSnapshot(request));
+        return success(task.searchSnapshot(request));
     }
 
     @PutMapping("/{snapId}")
     public Result<Snapshot> searchSnapshot(@PathVariable("snapId") Long snapId, @RequestBody CreateSnapshotRequest request) {
         request.setSnapId(snapId);
-        return ResultUtil.success(task.upgradeSnap(request));
+        return success(task.upgradeSnap(request));
     }
 
     @GetMapping("/{snapId}/shareCode")
     public Result<String> getSnapshotBySid(@PathVariable("snapId") Long snapId) {
-        return ResultUtil.success(task.getSnapshotById(snapId).getShareCode());
+        return success(task.getSnapshotById(snapId).getShareCode());
     }
+
+    @GetMapping("/{did}/snaps")
+    public Result<List<Snapshot>> getUserAllSnap(@PathVariable("did") Long did) {
+        return success(task.getDeveloperAllSnap(did));
+    }
+
+
 }

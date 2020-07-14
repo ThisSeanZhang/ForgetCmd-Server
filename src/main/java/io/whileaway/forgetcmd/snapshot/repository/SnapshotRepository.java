@@ -19,4 +19,8 @@ public interface SnapshotRepository extends BaseRepository<Snapshot, Long> {
 //    List<Snapshot> searchSnapshot(SearchSnapshotRequest request);
 
     Optional<Snapshot> findBySnapIdAndDid(Long snapId, Long did);
+
+    List<Snapshot> findByDid(Long did);
+
+    List<Snapshot> findByDidAndShareIsTrueAndShareCodeIsNull(Long did);
 }

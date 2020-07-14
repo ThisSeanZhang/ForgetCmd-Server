@@ -24,4 +24,5 @@ public interface CommitTask {
 
     List<CommandListResponse> commitCommandList();
 
+    List<CommandCommit> getUserAllCommits(Long did);
 }

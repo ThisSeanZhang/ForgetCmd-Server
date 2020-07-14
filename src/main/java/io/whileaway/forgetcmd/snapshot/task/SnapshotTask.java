@@ -22,4 +22,7 @@ public interface SnapshotTask {
     Snapshot getSnapshot(GetSnapshotRequest request);
 
     Snapshot upgradeSnap(CreateSnapshotRequest request);
+
+    List<Snapshot> getDeveloperAllSnap(Long did);
+
 }
