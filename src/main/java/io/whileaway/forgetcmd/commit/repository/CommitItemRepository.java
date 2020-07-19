@@ -12,7 +12,9 @@ import java.util.List;
 @Repository
 public interface CommitItemRepository extends BaseRepository<CommitItem, Long> {
 
-    List<CommitItem> findByCcidIn(List<Long> ccid);
+    List<CommitItem> findByCcidIn(List<Long> ccids);
+
+    List<CommitItem> findByCcid(Long ccid);
 
     @Modifying
     @Query(value="UPDATE CommitItem set cid = :cid where ccid in :ccids")

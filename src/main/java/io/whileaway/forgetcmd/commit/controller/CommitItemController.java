@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/commits/items")
+@RequestMapping("/items")
 public class CommitItemController {
 
     private final CommitItemTask task;
@@ -29,15 +29,20 @@ public class CommitItemController {
 //        return ResultUtil.success(task.getCommandCurrentVersion(cid));
 //    }
 
-    @GetMapping("cmds/{cid}/version/{version}")
-    @AdminPermit
-    public Result commandCommitItem(@PathVariable(name = "cid")Long cid, @PathVariable(name = "version") String version) {
-        return ResultUtil.success();
-    }
+//    @GetMapping("cmds/{cid}/version/{version}")
+//    @AdminPermit
+//    public Result commandCommitItem(@PathVariable(name = "cid")Long cid, @PathVariable(name = "version") String version) {
+//        return ResultUtil.success();
+//    }
 
     @GetMapping
     @AdminPermit
     public Result<List<CommitItem>> searchCommitItems(ItemSearchRequest request) {
         return ResultUtil.success(task.searchItems(request));
+    }
+
+    @GetMapping("commit/{ccid}")
+    public Result<List<CommitItem>> getCommitAllItems(@PathVariable("ccid") Long ccid) {
+        return ResultUtil.success(task.findItemsByCCID(ccid));
     }
 }

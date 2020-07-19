@@ -9,5 +9,7 @@ public interface CommitItemTask {
 
     List<CommitItem> searchItems(ItemSearchRequest request);
 
+    List<CommitItem> findItemsByCCID(Long ccid);
+
 //    List<CommitItem> getCommandCurrentVersion(Long cid);
 }

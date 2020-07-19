@@ -48,7 +48,6 @@ public class CommandCommitController {
 
 
     @GetMapping("/{ccid}")
-    @AdminPermit
     public Result<CommandCommit> getCommit(@PathVariable("ccid")Long cid) {
         return success(task.findById(cid));
     }
@@ -59,7 +58,7 @@ public class CommandCommitController {
         return success();
     }
 
-    @GetMapping("{did}")
+    @GetMapping("/developer/{did}")
     public Result<List<CommandCommit>> getUserCommits(@PathVariable("did")Long did) {
         return success(task.getUserAllCommits(did));
     }

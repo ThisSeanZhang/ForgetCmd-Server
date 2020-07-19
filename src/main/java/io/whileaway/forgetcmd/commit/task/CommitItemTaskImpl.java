@@ -33,6 +33,11 @@ public class CommitItemTaskImpl implements CommitItemTask {
         return service.findByCommitIds(ccids);
     }
 
+    @Override
+    public List<CommitItem> findItemsByCCID(Long ccid) {
+        return service.findByCommitId(ccid);
+    }
+
 //    @Override
 //    public List<CommitItem> getCommandCurrentVersion(Long cid) {
 //        List<CommandCommit> commits = commitService.findAllCurrentByCid(cid);
