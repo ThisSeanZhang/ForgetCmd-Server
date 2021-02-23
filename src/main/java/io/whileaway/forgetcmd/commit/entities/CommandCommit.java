@@ -28,7 +28,12 @@ public class CommandCommit {
     private Integer argNum;
     private String whenDeprecated;
     private String whenEnable;
+    // Developer ID
+    private Long did;
 
+    // improve cmd remark
+    @Column(columnDefinition="text")
+    private String remark;
     @Column(columnDefinition="text")
     private String options;
     @Column(columnDefinition="text")

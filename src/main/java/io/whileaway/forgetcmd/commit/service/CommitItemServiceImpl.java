@@ -26,4 +26,9 @@ public class CommitItemServiceImpl implements CommitItemService {
     public List<CommitItem> findByCommitIds(List<Long> ccids) {
         return repository.findByCcidIn(ccids);
     }
+
+    @Override
+    public List<CommitItem> findByCommitId(Long ccid) {
+        return repository.findByCcid(ccid);
+    }
 }

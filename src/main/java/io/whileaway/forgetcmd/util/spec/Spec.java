@@ -18,4 +18,8 @@ public interface Spec {
     static<B, T> Specification<B> isNull(SingularAttribute<B, T> attribute) {
         return (root, query, builder) -> builder.isNull(root.get(attribute));
     }
+
+    static<B, T> Specification<B> isTrue(SingularAttribute<B, Boolean> attribute) {
+        return (root, query, builder) -> builder.isTrue(root.get(attribute));
+    }
 }

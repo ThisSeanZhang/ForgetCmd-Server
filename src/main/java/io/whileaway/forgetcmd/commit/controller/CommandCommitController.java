@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static io.whileaway.forgetcmd.util.ResultUtil.success;
+
 @RestController
 @RequestMapping("/commits")
 public class CommandCommitController {
@@ -29,32 +31,35 @@ public class CommandCommitController {
     @PostMapping
     @AdminPermit
     public Result createCommit(@RequestBody CommandCommitRequest request) {
-        return ResultUtil.success(task.createCommandCommit(request));
+        return success(task.createCommandCommit(request));
     }
 
     @GetMapping
     @AdminPermit
     public Result<List<CommandCommit>> search(CommitSearchRequest request) {
-        return ResultUtil.success(task.searchAddLog(request));
+        return success(task.searchAddLog(request));
     }
 
     @GetMapping("/cmds")
     @AdminPermit
     public Result<List<CommandListResponse>> commitCommandList() {
-        return ResultUtil.success(task.commitCommandList());
+        return success(task.commitCommandList());
     }
 
 
     @GetMapping("/{ccid}")
-    @AdminPermit
     public Result<CommandCommit> getCommit(@PathVariable("ccid")Long cid) {
-        return ResultUtil.success(task.findById(cid));
+        return success(task.findById(cid));
     }
 
     @GetMapping("cmds/{cid}")
     @AdminPermit
     public Result<List<CommandCommit>> getCommandCommit(@PathVariable("cid")Long cid) {
-        return ResultUtil.success();
+        return success();
     }
 
+    @GetMapping("/developer/{did}")
+    public Result<List<CommandCommit>> getUserCommits(@PathVariable("did")Long did) {
+        return success(task.getUserAllCommits(did));
+    }
 }

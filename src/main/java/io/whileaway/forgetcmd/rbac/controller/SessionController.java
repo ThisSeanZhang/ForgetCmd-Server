@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import io.whileaway.forgetcmd.util.ResultUtil;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/sessions")
 public class SessionController {
@@ -28,5 +30,10 @@ public class SessionController {
     public Result deleteSession(@PathVariable("did") Long did) {
         rbacTask.deleteSession(did);
         return ResultUtil.success();
+    }
+
+    @GetMapping("/{did}")
+    public Result getSession(@PathVariable("did") Long did) {
+        return ResultUtil.success(rbacTask.getCurrentSessionDeveloper(did));
     }
 }

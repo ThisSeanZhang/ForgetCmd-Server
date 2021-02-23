@@ -73,4 +73,9 @@ public class CommitTaskImpl implements CommitTask {
         return service.commitCommandList();
     }
 
+    @Override
+    public List<CommandCommit> getUserAllCommits(Long did) {
+        return service.getUserAllCommits(did);
+    }
+
 }

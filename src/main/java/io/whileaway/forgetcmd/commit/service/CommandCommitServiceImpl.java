@@ -112,4 +112,9 @@ public class CommandCommitServiceImpl implements CommandCommitService {
     public List<CommandCommit> findAllCurrentByCid(Long cid) {
         return repository.findByCidAndStatus(cid, CommitStatus.NEED_REVIEW);
     }
+
+    @Override
+    public List<CommandCommit> getUserAllCommits(Long did) {
+        return repository.findByDid(did);
+    }
 }

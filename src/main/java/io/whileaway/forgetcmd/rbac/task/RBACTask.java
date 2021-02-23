@@ -13,4 +13,6 @@ public interface RBACTask {
     boolean existNameOrEmail(String key);
 
     void deleteSession(Long did);
+
+    Developer getCurrentSessionDeveloper(Long did);
 }

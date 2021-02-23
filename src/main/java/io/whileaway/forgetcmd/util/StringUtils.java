@@ -1,20 +1,38 @@
 package io.whileaway.forgetcmd.util;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StringUtils {
+
     public static boolean isEmptyOrBlank(String str) {
         return null == str || str.isEmpty() || str.isBlank();
     }
 
+    public static boolean isEmptyOrBlank(Supplier<String> str) {
+        return isEmptyOrBlank(str.get());
+    }
+
     public static boolean nonEmptyOrBlank(String str) {
         return !isEmptyOrBlank(str);
+    }
+
+    public static boolean eq(String s1, String s2) {
+        if (isEmptyOrBlank(s1)) return false;
+        if (isEmptyOrBlank(s2)) return false;
+        return s1.equals(s2);
+    }
+
+    public static String notEmptyOne(String s1, String s2) {
+        return nonEmptyOrBlank(s1) ? s1 : s2;
+    }
+    public static boolean eq(Supplier<String> s1, Supplier<String> s2) {
+        return eq(s1.get(), s2.get());
     }
 
     public static boolean anyIsEmptyOrBlank(String... strs) {
