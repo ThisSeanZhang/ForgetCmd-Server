@@ -26,6 +26,7 @@ public class AdminVerify {
         System.out.println(joinPoint.getSignature());
         System.out.println("AspectJ" + Arrays.toString(joinPoint.getArgs()));
         Developer developer = validUtil.getCurrentDeveloper();
+        System.out.println("developer: " + developer);
         if (!developer.isAdmin()) {
             DeveloperError.FORBIDDEN.throwThis();
         }
