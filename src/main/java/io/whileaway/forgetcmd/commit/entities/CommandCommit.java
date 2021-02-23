@@ -31,7 +31,7 @@ public class CommandCommit {
     // Developer ID
     private Long did;
 
-    // improve cmd remark
+    // improve io.whileaway.forgetcmd.cmd remark
     @Column(columnDefinition="text")
     private String remark;
     @Column(columnDefinition="text")

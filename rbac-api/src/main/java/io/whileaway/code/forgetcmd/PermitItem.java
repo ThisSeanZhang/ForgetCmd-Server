@@ -3,7 +3,8 @@ package io.whileaway.code.forgetcmd;
 import lombok.Data;
 
 @Data
-public class Relation {
+public class PermitItem {
 
-    private Long relId;
+    private Long piId;
+
 }

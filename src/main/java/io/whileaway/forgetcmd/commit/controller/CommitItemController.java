@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @RestController
@@ -44,5 +47,25 @@ public class CommitItemController {
     @GetMapping("commit/{ccid}")
     public Result<List<CommitItem>> getCommitAllItems(@PathVariable("ccid") Long ccid) {
         return ResultUtil.success(task.findItemsByCCID(ccid));
+    }
+
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        String temp = "UTF-8";
+        for (int i = 0; i < 1_0000_0000 ; i++) {
+            temp = MD2(temp);
+        }
+        System.out.println(temp);
+    }
+    public static String MD2 (String str) throws NoSuchAlgorithmException {
+            // 获取MD2加密工具
+            MessageDigest md = MessageDigest.getInstance("MD2");
+            // 加密
+            byte[] digest = md.digest(str.getBytes());
+            // 获取二进制十六进制互转工具
+            HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
+            // 将二进制数组转换为十六进制字符串
+            String marshal = hexBinaryAdapter.marshal(digest);
+            // 输出结果
+            return marshal;
     }
 }

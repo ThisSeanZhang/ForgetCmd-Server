@@ -58,16 +58,16 @@ public class CreateCmdRequest {
                         this.cmd::remainFromDataBase,
                         this.cmd::init
                 );
-//        if (Objects.nonNull(cmd.getCid())) {
-//            searchCmd.apply(cmd.getCid()).ifPresent(this.cmd::remainFromDataBase);
+//        if (Objects.nonNull(io.whileaway.forgetcmd.cmd.getCid())) {
+//            searchCmd.apply(io.whileaway.forgetcmd.cmd.getCid()).ifPresent(this.io.whileaway.forgetcmd.cmd::remainFromDataBase);
 //        } else {
-//            this.cmd.setStatus(CommandStatus.NORMAL);
+//            this.io.whileaway.forgetcmd.cmd.setStatus(CommandStatus.NORMAL);
 //        }
         return this.cmd;
     }
 
-//    private void remainSomeInCmd(Command cmd) {
-//        this.cmd.remainFromDataBase(cmd);
+//    private void remainSomeInCmd(Command io.whileaway.forgetcmd.cmd) {
+//        this.io.whileaway.forgetcmd.cmd.remainFromDataBase(io.whileaway.forgetcmd.cmd);
 //    }
 
 }

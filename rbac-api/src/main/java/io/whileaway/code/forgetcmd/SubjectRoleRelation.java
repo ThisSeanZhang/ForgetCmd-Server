@@ -3,7 +3,9 @@ package io.whileaway.code.forgetcmd;
 import lombok.Data;
 
 @Data
-public abstract class Subject {
+public class SubjectRoleRelation {
 
+    private Long srId;
     private Long sId;
+    private Long rId;
 }
